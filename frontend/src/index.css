@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #a3e635;
+  --color-brand-light: #bef264;
+  --color-brand-dark: #65a30d;
+  --color-dark-surface: #18181b;
+  --color-dark-bg: #09090b;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #ffffff;
+    color: #09090b;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Custom utility for the glowing text or box shadows */
+@layer utilities {
+  .glow-brand {
+    box-shadow: 0 0 20px 5px rgba(163, 230, 53, 0.3);
+  }
+}
