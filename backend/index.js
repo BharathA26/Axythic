@@ -38,7 +38,9 @@ app.post("/api/waitlist", (req, res) => {
 // Setup nodemailer transporter
 // NOTE: For production, use environment variables for user/pass
 const transporter = nodemailer.createTransport({
-  service: "gmail", // e.g., using Gmail
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER || "your-email@gmail.com",
     pass: process.env.EMAIL_PASS || "your-app-password",
@@ -76,12 +78,10 @@ app.post("/api/contact", async (req, res) => {
     console.error("Error sending email:", error);
     // If nodemailer fails (e.g., bad credentials), log it but we can simulate success for testing
     // Or return 500. We'll return 500 for proper error handling.
-    res
-      .status(500)
-      .json({
-        status: "error",
-        message: "Failed to send message. Please try again later.",
-      });
+    res.status(500).json({
+      status: "error",
+      message: "Failed to send message. Please try again later.",
+    });
   }
 });
 
