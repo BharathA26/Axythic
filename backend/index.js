@@ -38,9 +38,9 @@ app.post("/api/waitlist", (req, res) => {
 // Setup nodemailer transporter
 // NOTE: For production, use environment variables for user/pass
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  host: "smtp.hostinger.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER || "your-email@gmail.com",
     pass: process.env.EMAIL_PASS || "your-app-password",
@@ -70,7 +70,6 @@ app.post("/api/contact", async (req, res) => {
         <p>${message.replace(/\n/g, "<br>")}</p>
       `,
     };
-
     await transporter.sendMail(mailOptions);
     console.log(`Contact form email sent from ${email}`);
     res.json({ status: "success", message: "Message sent successfully!" });
