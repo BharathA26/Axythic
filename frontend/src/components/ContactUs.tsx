@@ -25,7 +25,7 @@ export default function ContactUs() {
     setStatus("submitting");
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch("https://axythic.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -55,7 +55,7 @@ export default function ContactUs() {
     setTimeout(() => {
       setStatus("idle");
       setSnackbarMessage("");
-    }, 5000);
+    }, 3000);
   };
 
   return (
