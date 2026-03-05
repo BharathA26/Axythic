@@ -190,7 +190,7 @@ export default function Shopcart() {
       )}
 
       {view === "profile" && <Profile onNavigate={navigateTo} />}
-      {view === "orders" && <Orders onNavigate={navigateTo} />}
+      {view === "orders" && <Orders />}
       {view === "wishlist" && (
         <Wishlist
           wishlist={wishlist}

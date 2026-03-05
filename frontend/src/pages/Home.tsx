@@ -4,7 +4,7 @@ import CodeDemo from "../components/CodeDemo";
 import OurStory from "../components/OurStory";
 import VisionMission from "../components/VisionMission";
 import Features from "../components/Features";
-import TechStack from "../components/TechStack";
+
 import Portfolio from "../components/Portfolio";
 import FAQ from "../components/FAQ";
 import ContactUs from "../components/ContactUs";

@@ -8,11 +8,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { products } from "./data";
-import type { View } from "./types";
-
-interface OrdersProps {
-  onNavigate: (view: View) => void;
-}
 
 const sampleOrders = [
   {
@@ -71,7 +66,7 @@ const statusConfig: Record<
   Cancelled: { Icon: XCircle, color: "text-red-500", bg: "bg-red-50" },
 };
 
-export default function Orders({ onNavigate }: OrdersProps) {
+export default function Orders() {
   const [filter, setFilter] = useState("All");
   const [expanded, setExpanded] = useState<string | null>(null);
 
