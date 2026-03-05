@@ -39,18 +39,21 @@ export default function Portfolio() {
       ],
     },
     {
-      title: "E-Commerce Suite",
-      category: "Platform",
+      title: "Shopcart",
+      category: "E-Commerce Website",
       description:
-        "Robust B2B e-commerce platform with inventory management and AI-driven insights.",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-      gradient: "from-blue-600 to-indigo-600",
-      url: "#",
+        "A fully-featured headphone & electronics store with product listings, filtering, cart, checkout flow, and an order summary page.",
+      image: "/shopcart-preview.png",
+      gradient: "from-emerald-700 to-green-500",
+      url: "/shopcart",
       modules: [
-        { label: "Inventory", endpoint: "#" },
-        { label: "Orders", endpoint: "#" },
-        { label: "Insights", endpoint: "#" },
+        { label: "Home", endpoint: "/shopcart" },
+        { label: "Products", endpoint: "/shopcart" },
+        { label: "Product Detail", endpoint: "/shopcart" },
+        { label: "Cart", endpoint: "/shopcart" },
+        { label: "Checkout", endpoint: "/shopcart" },
+        { label: "Order Summary", endpoint: "/shopcart" },
+        { label: "Categories", endpoint: "/shopcart" },
       ],
     },
   ];
