@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import CodeDemo from "../components/CodeDemo";
 import OurStory from "../components/OurStory";
 import VisionMission from "../components/VisionMission";
 import Features from "../components/Features";
@@ -61,10 +62,11 @@ function Home() {
       ) : (
         <main className="flex-grow">
           <Hero />
+          <CodeDemo />
           <OurStory />
           <VisionMission />
           <Features />
-          <TechStack />
+          {/* <TechStack /> */}
           <Portfolio />
           <FAQ />
           <ContactUs />

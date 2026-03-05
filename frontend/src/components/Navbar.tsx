@@ -19,7 +19,7 @@ export default function Navbar() {
 
           {/* Nav Links */}
           <div className="hidden md:flex items-center space-x-8">
-            {["Our Story", "Vision & Mission", "Portfolio", "Contact Us"].map(
+            {["Our Story", "Vision & Mission", "Portfolio"].map(
               (item, index) => (
                 <motion.a
                   key={item}
