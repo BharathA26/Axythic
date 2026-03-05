@@ -1,16 +1,27 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Portfolio() {
   const projects = [
     {
-      title: "Fintech Dashboard",
-      category: "Web Application",
+      title: "Axythic Fin Suite",
+      category: "Static Portfolio Website",
       description:
-        "A comprehensive analytics tool for financial institutions with real-time tracking.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-      gradient: "from-blue-500 to-cyan-500",
+        "A complete finance product showcase with polished static screens for dashboard and operations workflows.",
+      image: "/vite.png",
+      gradient: "from-emerald-600 to-teal-500",
+      url: "/axythicfin/dashboard",
+      modules: [
+        { label: "Dashboard", endpoint: "/axythicfin/dashboard" },
+        { label: "Quotation", endpoint: "/axythicfin/quotation" },
+        { label: "Invoice", endpoint: "/axythicfin/invoice" },
+        { label: "Orders", endpoint: "/axythicfin/orders" },
+        { label: "Transactions", endpoint: "/axythicfin/transactions" },
+        { label: "Profile", endpoint: "/axythicfin/profile" },
+        { label: "Login", endpoint: "/axythicfin/login" },
+        { label: "Logout", endpoint: "/axythicfin/logout" },
+      ],
     },
     {
       title: "HealthConnect",
@@ -20,6 +31,12 @@ export default function Portfolio() {
       image:
         "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
       gradient: "from-indigo-500 to-purple-500",
+      url: "#",
+      modules: [
+        { label: "Appointments", endpoint: "#" },
+        { label: "Consultation", endpoint: "#" },
+        { label: "Notifications", endpoint: "#" },
+      ],
     },
     {
       title: "E-Commerce Suite",
@@ -29,6 +46,12 @@ export default function Portfolio() {
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
       gradient: "from-blue-600 to-indigo-600",
+      url: "#",
+      modules: [
+        { label: "Inventory", endpoint: "#" },
+        { label: "Orders", endpoint: "#" },
+        { label: "Insights", endpoint: "#" },
+      ],
     },
   ];
 
@@ -72,38 +95,93 @@ export default function Portfolio() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <div className="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-colors z-10" />
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                />
-                <div
-                  className={`absolute top-4 left-4 z-20 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${project.gradient} shadow-md`}
-                >
-                  {project.category}
+          {projects.map((project, index) => {
+            const isExternalUrl = project.url.startsWith("http");
+
+            const cardContent = (
+              <>
+                <div className="relative h-64 overflow-hidden">
+                  <div className="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-colors z-10" />
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div
+                    className={`absolute top-4 left-4 z-20 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${project.gradient} shadow-md`}
+                  >
+                    {project.category}
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                  {project.title}
-                </h4>
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  {project.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    {project.title}
+                  </h4>
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    {project.description}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {/* Modules */}
+                    {project.modules.map((module, moduleIndex) => {
+                      const isExternalModule =
+                        module.endpoint.startsWith("http") ||
+                        module.endpoint === "#";
+                      return (
+                        <div key={`${project.title}-${moduleIndex}`}>
+                          {isExternalModule ? (
+                            <a
+                              href={module.endpoint}
+                              onClick={(event) => event.stopPropagation()}
+                              className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition-colors inline-block"
+                            >
+                              {module.label}
+                            </a>
+                          ) : (
+                            <Link
+                              to={module.endpoint}
+                              onClick={(event) => event.stopPropagation()}
+                              className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition-colors inline-block"
+                            >
+                              {module.label}
+                            </Link>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            );
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 block relative"
+              >
+                {isExternalUrl ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full cursor-pointer"
+                  >
+                    {cardContent}
+                  </a>
+                ) : (
+                  <Link
+                    to={project.url}
+                    className="block h-full cursor-pointer"
+                  >
+                    {cardContent}
+                  </Link>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

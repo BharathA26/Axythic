@@ -1,18 +1,11 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/axythic")
-  .then(() => console.log("MongoDB Connected successfully"))
-  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Basic health check route
 app.get("/api/health", (req, res) => {
