@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import OurStory from "../components/OurStory";
 import VisionMission from "../components/VisionMission";
+import Features from "../components/Features";
 import TechStack from "../components/TechStack";
 import Portfolio from "../components/Portfolio";
 import FAQ from "../components/FAQ";
@@ -62,6 +63,7 @@ function Home() {
           <Hero />
           <OurStory />
           <VisionMission />
+          <Features />
           <TechStack />
           <Portfolio />
           <FAQ />
