@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -12,7 +12,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">
               Axythic
             </span>
           </motion.div>
@@ -24,7 +24,7 @@ export default function Navbar() {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`}
-                  className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+                  className="text-sm font-semibold text-gray-900 hover:text-blue-700 transition-colors"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}

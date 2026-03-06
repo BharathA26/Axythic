@@ -6,10 +6,10 @@ export default function Portfolio() {
   const projects = [
     {
       title: "Axythic Fin Suite",
-      category: "Static Portfolio Website",
+      category: "Finance Dashboard",
       description:
         "A complete finance product showcase with polished static screens for dashboard and operations workflows.",
-      image: "/vite.png",
+      image: "/finance-dashboard-preview.png",
       gradient: "from-emerald-600 to-teal-500",
       url: "/axythicfin/dashboard",
       modules: [
@@ -24,18 +24,19 @@ export default function Portfolio() {
       ],
     },
     {
-      title: "HealthConnect",
-      category: "Mobile App",
+      title: "EduQuest LMS",
+      category: "EdTech Platform",
       description:
-        "Telemedicine application connecting patients with healthcare professionals seamlessly.",
+        "A comprehensive learning management system featuring role-based access for instructors to manage classes, attendance tracking, and student notifications.",
       image:
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
-      gradient: "from-indigo-500 to-purple-500",
-      url: "#",
+        "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800",
+      gradient: "from-indigo-600 to-purple-600",
+      url: "/eduquest/student",
       modules: [
-        { label: "Appointments", endpoint: "#" },
-        { label: "Consultation", endpoint: "#" },
-        { label: "Notifications", endpoint: "#" },
+        { label: "Dashboard", endpoint: "/eduquest/student" },
+        { label: "Class Management", endpoint: "/eduquest/courses" },
+        { label: "Attendance", endpoint: "/eduquest/admin" },
+        { label: "Notifications", endpoint: "/eduquest/admin" },
       ],
     },
     {

@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import PrivacyPolicy from "../components/PrivacyPolicy";
 import TermsAndConditions from "../components/TermsAndConditions";
+import BackToTop from "../components/BackToTop";
 
 function Home() {
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
@@ -39,7 +40,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen font-sans selection:bg-blue-500/30 selection:text-blue-900 bg-white flex flex-col">
+    <div className="min-h-screen font-sans selection:bg-blue-500/30 selection:text-blue-900 bg-white flex flex-col overflow-x-hidden">
       <Navbar />
       {isPrivacyPolicyOpen ? (
         <main className="flex-grow">
@@ -85,6 +86,7 @@ function Home() {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
+      <BackToTop />
     </div>
   );
 }

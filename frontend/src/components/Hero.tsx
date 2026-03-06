@@ -4,7 +4,7 @@ import { ArrowRight, Code, Smartphone, Monitor } from "lucide-react";
 export default function Hero() {
   return (
     <section
-      className="pt-32 pb-8 px-4 relative flex flex-col items-center justify-center overflow-visible"
+      className="pt-32 pb-8 px-4 relative flex flex-col items-center justify-center overflow-hidden"
       id="hero"
     >
       {/* Background Gradient Elements */}
