@@ -6,6 +6,7 @@ import VisionMission from "../components/VisionMission";
 import Features from "../components/Features";
 
 import Portfolio from "../components/Portfolio";
+import Testimonials from "../components/Testimonials";
 import FAQ from "../components/FAQ";
 import ContactUs from "../components/ContactUs";
 import CTA from "../components/CTA";
@@ -69,6 +70,7 @@ function Home() {
           <Features />
           {/* <TechStack /> */}
           <Portfolio />
+          <Testimonials />
           <FAQ />
           <ContactUs />
           <CTA />

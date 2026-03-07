@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Portfolio() {
@@ -57,13 +56,58 @@ export default function Portfolio() {
         { label: "Categories", endpoint: "/shopcart" },
       ],
     },
+    {
+      title: "HRM Platform",
+      category: "Human Resources",
+      description:
+        "A streamlined human resource management system to handle employee records, onboarding workflows, leave tracking, and payroll integrations.",
+      image:
+        "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800",
+      gradient: "from-blue-600 to-cyan-500",
+      url: "#",
+      modules: [
+        { label: "Overview", endpoint: "#" },
+        { label: "Employees", endpoint: "#" },
+        { label: "Leave System", endpoint: "#" },
+      ],
+    },
+    {
+      title: "3D Landing Page",
+      category: "Web Presentation",
+      description:
+        "An immersive WebGL-powered 3D landing page experience designed to engage visitors with interactive elements and modern web animations.",
+      image:
+        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800",
+      gradient: "from-fuchsia-600 to-pink-500",
+      url: "#",
+      modules: [
+        { label: "Hero Animation", endpoint: "#" },
+        { label: "3D Models", endpoint: "#" },
+        { label: "Interactive Flow", endpoint: "#" },
+      ],
+    },
+    {
+      title: "Mobile Applications",
+      category: "Native Apps",
+      description:
+        "Showcase of cross-platform mobile applications built in React Native with sleek UI components, optimized performance, and native integrations.",
+      image:
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
+      gradient: "from-orange-500 to-rose-500",
+      url: "#",
+      modules: [
+        { label: "iOS App", endpoint: "#" },
+        { label: "Android App", endpoint: "#" },
+        { label: "UI Kit", endpoint: "#" },
+      ],
+    },
   ];
 
   return (
     <section id="portfolio" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
+        <div className="flex flex-col items-center justify-center text-center mb-16 gap-6">
+          <div className="max-w-2xl flex flex-col items-center">
             <motion.h2
               className="text-sm font-bold text-blue-600 uppercase tracking-wider mb-2"
               initial={{ opacity: 0, y: 10 }}
@@ -85,17 +129,6 @@ export default function Portfolio() {
               </span>
             </motion.h3>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <button className="text-blue-600 font-semibold flex items-center gap-2 hover:text-blue-700 transition-colors">
-              View All Projects <ExternalLink className="w-4 h-4" />
-            </button>
-          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
