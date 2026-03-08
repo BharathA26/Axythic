@@ -9,7 +9,7 @@ This skill provides an overview of the Axythic web application, outlining its fr
 
 ## 1. Product Vision & Features
 
-Axythic is being built to serve customers as a SaaS product. The platform's structure includes several key sections that highlight the core offering and demonstrate the capabilities.
+Axythic is being built to serve customers as a SaaS product. This application acts as our landing page and it must have an extremely premium, high-quality, and modern look and feel. The platform's structure includes several key sections that highlight the core offering and demonstrate the capabilities.
 
 ### Key Sections & Features
 
