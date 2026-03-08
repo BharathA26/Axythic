@@ -1,15 +1,25 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Code, Smartphone, Monitor } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 
 export default function Hero() {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
   return (
     <section
       className="pt-32 pb-8 px-4 relative flex flex-col items-center justify-center overflow-hidden"
       id="hero"
     >
       {/* Background Gradient Elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-gradient-to-b from-blue-500/10 via-indigo-500/5 to-transparent blur-[100px] -z-10 rounded-full" />
-      <div className="absolute bottom-0 right-[-20%] w-[600px] h-[600px] bg-gradient-to-tr from-purple-500/10 to-indigo-500/10 blur-[120px] rounded-full -z-10" />
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-gradient-to-b from-blue-500/10 via-indigo-500/5 to-transparent blur-[100px] -z-10 rounded-full"
+      />
+      <motion.div
+        style={{ y: y2 }}
+        className="absolute bottom-0 right-[-20%] w-[600px] h-[600px] bg-gradient-to-tr from-purple-500/10 to-indigo-500/10 blur-[120px] rounded-full -z-10"
+      />
 
       <div className="max-w-5xl mx-auto text-center mt-12 z-10">
         <motion.div
@@ -54,18 +64,20 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <a
+          <MagneticButton
             href="#contact-us"
-            className="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+            as="a"
+            className="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
           >
             Start Your Project <ArrowRight className="w-5 h-5" />
-          </a>
-          <a
+          </MagneticButton>
+          <MagneticButton
             href="#portfolio"
-            className="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg border border-gray-200 hover:bg-gray-50 transition-all inline-block"
+            as="a"
+            className="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg border border-gray-200 hover:bg-gray-50 transition-all text-center"
           >
             View Our Work
-          </a>
+          </MagneticButton>
         </motion.div>
       </div>
 
