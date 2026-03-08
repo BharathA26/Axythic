@@ -1,4 +1,3 @@
-import React from "react";
 import { HRMLayout } from "./components/HRMLayout";
 import {
   Calendar as CalendarIcon,

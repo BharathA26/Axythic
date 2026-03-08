@@ -1,4 +1,3 @@
-import React, { Suspense, lazy } from "react";
 import { HRMLayout } from "./components/HRMLayout";
 import {
   Search,
