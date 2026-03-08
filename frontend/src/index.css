@@ -10,11 +10,50 @@
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
+/* ─── Theme CSS Variables ─── */
+:root {
+  --bg-page: #ffffff;
+  --bg-card: rgba(0, 0, 0, 0.03);
+  --bg-card-hover: rgba(0, 0, 0, 0.06);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --text-primary: #09090b;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  --navbar-bg: rgba(255, 255, 255, 0.95);
+  --navbar-border: rgba(0, 0, 0, 0.08);
+  --orb-opacity: 0.06;
+  --dot-color: rgba(0, 0, 0, 0.05);
+}
+
+:root.dark {
+  --bg-page: #030303;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.09);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --text-primary: #ffffff;
+  --text-muted: #9ca3af;
+  --text-faint: #6b7280;
+  --navbar-bg: rgba(3, 3, 3, 0.95);
+  --navbar-border: rgba(255, 255, 255, 0.08);
+  --orb-opacity: 0.1;
+  --dot-color: rgba(255, 255, 255, 0.15);
+}
+
 @layer base {
+  html {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
   body {
-    background-color: #ffffff;
-    color: #09090b;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
     font-family: var(--font-sans);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 }
 
@@ -22,6 +61,23 @@
 @layer utilities {
   .glow-brand {
     box-shadow: 0 0 20px 5px rgba(163, 230, 53, 0.3);
+  }
+
+  /* Theme-aware utilities */
+  .bg-theme-page {
+    background-color: var(--bg-page);
+  }
+  .bg-theme-card {
+    background-color: var(--bg-card);
+  }
+  .border-theme {
+    border-color: var(--border-color);
+  }
+  .text-theme-primary {
+    color: var(--text-primary);
+  }
+  .text-theme-muted {
+    color: var(--text-muted);
   }
 }
 

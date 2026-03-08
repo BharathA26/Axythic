@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/vite.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Axythic</title>
+    <!-- Anti-FOUC: Apply saved theme class before React mounts -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem("axythic-theme");
+        var theme = saved === "light" ? "light" : "dark";
+        document.documentElement.classList.add(theme);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

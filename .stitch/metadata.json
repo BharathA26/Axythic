@@ -1,0 +1,30 @@
+{
+  "name": "projects/665222673755533742",
+  "projectId": "665222673755533742",
+  "title": "Axythic Landing Page - Dark Premium",
+  "visibility": "PRIVATE",
+  "projectType": "PROJECT_DESIGN",
+  "origin": "STITCH",
+  "deviceType": "DESKTOP",
+  "designTheme": {
+    "colorMode": "DARK",
+    "font": "INTER",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#135bec",
+    "saturation": 3
+  },
+  "screens": {
+    "landing": {
+      "id": "8c0a23e627964e0fa1c8f959c936408c",
+      "sourceScreen": "projects/665222673755533742/screens/8c0a23e627964e0fa1c8f959c936408c",
+      "x": 0,
+      "y": 0,
+      "width": 2560,
+      "height": 8680,
+      "title": "Axythic Premium Dark Landing Page"
+    }
+  },
+  "metadata": {
+    "userRole": "OWNER"
+  }
+}

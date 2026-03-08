@@ -9,7 +9,7 @@ import Portfolio from "../components/Portfolio";
 import Testimonials from "../components/Testimonials";
 import FAQ from "../components/FAQ";
 import ContactUs from "../components/ContactUs";
-import CTA from "../components/CTA";
+// import CTA from "../components/CTA";
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import PrivacyPolicy from "../components/PrivacyPolicy";
@@ -41,7 +41,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen font-sans selection:bg-blue-500/30 selection:text-blue-900 bg-white flex flex-col overflow-x-hidden">
+    <div
+      className="min-h-screen font-sans selection:bg-blue-500/30 selection:text-blue-900 flex flex-col overflow-x-hidden transition-colors duration-300"
+      style={{ backgroundColor: "var(--bg-page)" }}
+    >
       <Navbar />
       {isPrivacyPolicyOpen ? (
         <main className="flex-grow">
@@ -73,7 +76,7 @@ function Home() {
           <Testimonials />
           <FAQ />
           <ContactUs />
-          <CTA />
+          {/* <CTA /> */}
         </main>
       )}
       <Footer

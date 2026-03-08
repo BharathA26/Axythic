@@ -4,6 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 interface MagneticButtonProps {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   onClick?: () => void;
   as?: React.ElementType;
   href?: string;
@@ -12,6 +13,7 @@ interface MagneticButtonProps {
 export default function MagneticButton({
   children,
   className = "",
+  style,
   onClick,
   as: Component = "button",
   href,
@@ -51,6 +53,7 @@ export default function MagneticButton({
       onMouseLeave={reset}
       animate={controls}
       className={`${className}`}
+      style={style}
       onClick={onClick}
       {...(href ? { href } : {})}
     >

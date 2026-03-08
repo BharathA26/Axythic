@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Plus, Star } from "lucide-react";
+import { Star, Sparkles } from "lucide-react";
 
 interface Testimonial {
   id: number;
@@ -67,44 +67,40 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-// Pre-define duplicated/shuffled rows to avoid hydration issues
 const row1 = [...testimonials];
 const row2 = [...testimonials].reverse();
 
 const TestimonialCard = ({ item }: { item: Testimonial }) => {
   return (
-    <div className="w-[320px] md:w-[380px] bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col gap-4 font-sans hover:border-[#a3e635] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 flex-shrink-0 relative group">
-      {/* Plus icon on top right indicating focusable action */}
-      <div className="absolute top-4 right-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
-        <Plus className="w-5 h-5 hover:text-gray-600 transition-colors cursor-pointer" />
-      </div>
+    <div className="w-[320px] md:w-[380px] bg-theme-card rounded-2xl p-6 border border-theme hover:bg-theme-card hover:border-white/20 transition-all duration-300 flex flex-col gap-4 font-sans flex-shrink-0 relative group backdrop-blur-sm">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 to-purple-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 
-      <div className="flex items-center gap-3">
+      <div className="relative z-10 flex items-center gap-3">
         <img
           src={item.image}
           alt={item.name}
-          className="w-11 h-11 rounded-full object-cover bg-gray-100 border border-gray-100"
+          className="w-11 h-11 rounded-full object-cover border border-white/20"
         />
         <div className="flex flex-col">
-          <h4 className="text-gray-900 font-semibold text-sm leading-tight">
+          <h4 className="text-theme-primary font-semibold text-sm leading-tight">
             {item.name}
           </h4>
-          <p className="text-gray-500 text-xs mt-0.5">{item.role}</p>
+          <p className="text-theme-muted text-xs mt-0.5">{item.role}</p>
         </div>
       </div>
 
-      <p className="text-gray-700 text-[15px] leading-relaxed whitespace-normal flex-1">
+      <p className="relative z-10 text-theme-muted text-[15px] leading-relaxed whitespace-normal flex-1 font-light">
         "{item.content}"
       </p>
 
-      <div className="flex items-center gap-1 pt-3 mt-1 border-t border-gray-100">
+      <div className="relative z-10 flex items-center gap-1 pt-3 mt-1 border-t border-theme">
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
             className={`w-4 h-4 ${
               i < item.rating
                 ? "fill-yellow-400 text-yellow-400"
-                : "fill-gray-200 text-gray-200"
+                : "fill-white/10 text-white/10"
             }`}
           />
         ))}
@@ -135,7 +131,6 @@ const TestimonialTrack = ({
             <TestimonialCard key={`a-${item.id}-${idx}`} item={item} />
           ))}
         </div>
-        {/* Duplicate the items for seamless looping */}
         <div className="flex gap-4 pr-4">
           {items.map((item, idx) => (
             <TestimonialCard key={`b-${item.id}-${idx}`} item={item} />
@@ -150,33 +145,43 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-24 bg-[#F8FAFC] relative overflow-hidden"
+      className="py-32 bg-theme-page transition-colors duration-300 relative overflow-hidden"
     >
+      {/* Background orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/8 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/8 rounded-full blur-[120px] pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-white border border-gray-200 text-sm font-medium text-gray-700 mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6"
           >
-            Testimonials
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            <span className="text-sm font-medium text-yellow-400 tracking-wide uppercase">
+              Testimonials
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight"
+            className="text-4xl md:text-6xl font-extrabold text-theme-primary mb-6 tracking-tight leading-[1.1]"
           >
-            What Our Clients Are Saying
+            What Our Clients{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+              Are Saying
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-theme-muted max-w-2xl mx-auto font-light"
           >
             We take pride in delivering exceptional solutions...{" "}
             <br className="hidden sm:block" />

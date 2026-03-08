@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Axythic HRM Dashboard Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2766ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-white group/design-root overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center bg-white p-4 pb-2 justify-between border-b border-slate-100">
+<div class="flex size-10 shrink-0 items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div class="flex-1 px-3">
+<h2 class="text-slate-900 text-lg font-bold leading-tight tracking-tight">Axythic</h2>
+<p class="text-xs text-slate-500 font-medium">Philipp Davidson</p>
+</div>
+<div class="flex gap-2 items-center">
+<button class="flex size-10 items-center justify-center rounded-full bg-slate-50 text-slate-600">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary/20 p-0.5">
+<img alt="Profile" class="w-full h-full rounded-full object-cover" data-alt="Portrait of Philipp Davidson HR Manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIUktC-ok4OQ5E1L9q4vbrGcRHWsTvhLxyOWPuWOx4rGG2Vvs1oqLMu2RXgy-AQoJI9shrKrsW-g2uictY1kXG5E6ow4V81GUmJ6yWLRB3feFVe97ap7qkV8htLwVULrjaWMb8H7yKS5pRyJFmPW_tK05JFxbdrWqB1y-nHSX8ZiRHgv4PYnAZRXXaBVIRGRKyv0JUphvRd-tEREvRNLupNDCm2YMQ9EM-TEiGgeQkROjeEzjJu4m1RQkW7Juzc77E9FNeSEgdveU"/>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="bg-white sticky top-0 z-10">
+<div class="flex border-b border-slate-100 px-4 overflow-x-auto hide-scrollbar gap-6">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-3 pt-4 shrink-0" href="#">
+<p class="text-sm font-bold tracking-tight">Dashboard</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 pb-3 pt-4 shrink-0" href="#">
+<p class="text-sm font-medium">Personnel</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 pb-3 pt-4 shrink-0" href="#">
+<p class="text-sm font-medium">Applications</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 pb-3 pt-4 shrink-0" href="#">
+<p class="text-sm font-medium">Talent Pool</p>
+</a>
+</div>
+</div>
+<!-- Stats Overview (Horizontal Scroll) -->
+<div class="flex gap-4 p-4 overflow-x-auto hide-scrollbar">
+<div class="flex min-w-[160px] flex-col gap-2 rounded-xl p-4 bg-white border border-slate-100 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Total Employees</p>
+<span class="material-symbols-outlined text-primary text-sm">groups</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 text-2xl font-bold">254</p>
+<p class="text-emerald-600 text-xs font-bold">+12%</p>
+</div>
+<div class="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+</div>
+<div class="flex min-w-[160px] flex-col gap-2 rounded-xl p-4 bg-white border border-slate-100 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Open Positions</p>
+<span class="material-symbols-outlined text-primary text-sm">work</span>
+</div>
+<p class="text-slate-900 text-2xl font-bold">18</p>
+<div class="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[40%]"></div>
+</div>
+</div>
+<div class="flex min-w-[160px] flex-col gap-2 rounded-xl p-4 bg-white border border-slate-100 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">New Apps</p>
+<span class="material-symbols-outlined text-primary text-sm">description</span>
+</div>
+<p class="text-slate-900 text-2xl font-bold">42</p>
+<div class="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%]"></div>
+</div>
+</div>
+</div>
+<!-- Recruitment Pipeline -->
+<div class="px-4 py-2">
+<h2 class="text-slate-900 text-lg font-bold leading-tight mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span> Recruitment Pipeline
+            </h2>
+<div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm space-y-3">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium text-slate-500">
+<span>Applied</span>
+<span>124</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full">
+<div class="h-full bg-primary rounded-full w-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium text-slate-500">
+<span>Screened</span>
+<span>86</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full">
+<div class="h-full bg-primary/80 rounded-full w-[70%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium text-slate-500">
+<span>Interview</span>
+<span>32</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full">
+<div class="h-full bg-primary/60 rounded-full w-[35%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium text-slate-500">
+<span>Offered</span>
+<span>12</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full">
+<div class="h-full bg-primary/40 rounded-full w-[15%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Hirings -->
+<div class="px-4 py-4">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-slate-900 text-lg font-bold">Recent Hirings</h2>
+<button class="text-primary text-sm font-bold">View all</button>
+</div>
+<div class="space-y-3">
+<!-- Hiring Card 1 -->
+<div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-slate-100">
+<img alt="Staff" class="size-12 rounded-lg object-cover" data-alt="Portrait of newly hired female employee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxpmpEg7qwnWXofWfS09q4nYXEH4_MIWB-7RJPT6exRuFj3vWLPC5H5TmX9ZvoFSuN_2cxS_hC-urpCU6TVpRsgYAOT8Q8iTRsFU8ZsZM8vl5lqflsq4AgPkpti2HA4_bUG5GQsjUs_a7WVbmUgVZsTua10iX9uukqqJ0kRKfqvJ5b0GKLl0d2XzD3beXbFmY0MnP7J87AO_Uj3ylIjA_pbpuUmvykQ0dWX_VkDp9H-At8VELkVYojooen1xu0TrgGSguxL203J-w"/>
+<div class="flex-1">
+<p class="text-slate-900 font-bold text-sm">Sarah Jenkins</p>
+<p class="text-slate-500 text-xs">Product Designer • Design</p>
+</div>
+<div class="bg-emerald-50 text-emerald-600 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Hired</div>
+</div>
+<!-- Hiring Card 2 -->
+<div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-slate-100">
+<img alt="Staff" class="size-12 rounded-lg object-cover" data-alt="Portrait of newly hired male employee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAubEtNdfdAzWgX9k-OJjIFVQal9IgttepOfXuXsJNsTG-GbGISaRv2PQwAS20gxC1Cef7OyzzNhFNZ47WqGeQiw--Rcc-tnBfkkbcSlJLW_PAySE4vxYT9hNT-PXmCMkPSXIVj_Il4IZmNsNU6oMzp5zkgXJ0wuc0t6TfH1K2ieBdD_UzLl22SH7m3lY26joddSVx780Ux58he4oENIWYzCGxLYOzYIdsRE33wSBjP3zIkYVyiJ3exIJZRzGb5oFBSaRLTUJvrsPo"/>
+<div class="flex-1">
+<p class="text-slate-900 font-bold text-sm">Michael Ross</p>
+<p class="text-slate-500 text-xs">Fullstack Dev • Engineering</p>
+</div>
+<div class="bg-emerald-50 text-emerald-600 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Hired</div>
+</div>
+</div>
+</div>
+<!-- Upcoming Interviews & Tasks -->
+<div class="px-4 py-2 pb-24">
+<div class="grid grid-cols-1 gap-4">
+<!-- Interviews -->
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+<h3 class="text-slate-900 font-bold mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">event</span> Upcoming Interviews
+                    </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-start border-l-2 border-primary pl-3 py-1">
+<div>
+<p class="text-sm font-bold">Cody Fisher</p>
+<p class="text-xs text-slate-500">10:30 AM • Zoom Meeting</p>
+</div>
+<span class="text-[10px] font-medium text-slate-400">In 30m</span>
+</div>
+<div class="flex justify-between items-start border-l-2 border-slate-300 pl-3 py-1">
+<div>
+<p class="text-sm font-bold">Jane Cooper</p>
+<p class="text-xs text-slate-500">02:00 PM • On-site</p>
+</div>
+<span class="text-[10px] font-medium text-slate-400">Today</span>
+</div>
+</div>
+</div>
+<!-- HR Tasks -->
+<div class="bg-primary/5 p-4 rounded-xl border border-primary/10">
+<h3 class="text-slate-900 font-bold mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">checklist</span> HR Tasks
+                    </h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 p-2 bg-white rounded-lg border border-primary/10">
+<input class="rounded text-primary focus:ring-primary size-4" type="checkbox"/>
+<span class="text-sm font-medium text-slate-700">Review UX Applications</span>
+</label>
+<label class="flex items-center gap-3 p-2 bg-white rounded-lg border border-primary/10">
+<input class="rounded text-primary focus:ring-primary size-4" type="checkbox"/>
+<span class="text-sm font-medium text-slate-700">Send Offer to Sarah J.</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50 flex border-t border-slate-100 bg-white/95 backdrop-blur-md px-4 pb-6 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">grid_view</span>
+<p class="text-[10px] font-bold tracking-tight">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">groups</span>
+<p class="text-[10px] font-medium tracking-tight">People</p>
+</a>
+<div class="flex flex-1 flex-col items-center justify-center -mt-8">
+<button class="size-12 rounded-full bg-primary text-white shadow-lg shadow-primary/40 flex items-center justify-center">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">description</span>
+<p class="text-[10px] font-medium tracking-tight">Apps</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-medium tracking-tight">Events</p>
+</a>
+</div>
+</div>
+</body></html>

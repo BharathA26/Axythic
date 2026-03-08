@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, Send, CheckCircle2, XCircle } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Send,
+  CheckCircle2,
+  XCircle,
+  Sparkles,
+} from "lucide-react";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -51,7 +58,6 @@ export default function ContactUs() {
       setSnackbarMessage("A network error occurred. Please try again later.");
     }
 
-    // Hide snackbar after 5 seconds
     setTimeout(() => {
       setStatus("idle");
       setSnackbarMessage("");
@@ -61,36 +67,39 @@ export default function ContactUs() {
   return (
     <section
       id="contact-us"
-      className="py-24 bg-gray-50 relative overflow-hidden"
+      className="py-32 bg-theme-page transition-colors duration-300 relative overflow-hidden"
     >
-      {/* Abstract Background Design */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/5 rounded-full blur-[100px] -z-10" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-indigo-500/5 rounded-full blur-[100px] -z-10" />
+      {/* Background orbs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <motion.h2
-            className="text-sm font-bold text-blue-600 uppercase tracking-wider mb-2"
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Get In Touch
-          </motion.h2>
+            <Sparkles className="w-4 h-4 text-blue-400" />
+            <span className="text-sm font-medium text-blue-400 tracking-wide uppercase">
+              Get In Touch
+            </span>
+          </motion.div>
           <motion.h3
-            className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-4"
+            className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight mb-4"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
             Let's Build Something{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
               Great
             </span>
           </motion.h3>
           <motion.p
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-theme-muted max-w-2xl mx-auto font-light"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -110,29 +119,29 @@ export default function ContactUs() {
             transition={{ duration: 0.5 }}
             className="space-y-8"
           >
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 h-full flex flex-col justify-center space-y-8">
+            <div className="bg-theme-card border border-theme p-8 rounded-3xl h-full flex flex-col justify-center space-y-8 backdrop-blur-sm">
               <div className="flex items-start gap-4">
-                <div className="bg-blue-50 text-blue-600 p-3 rounded-2xl">
+                <div className="bg-blue-500/20 border border-blue-500/30 text-blue-400 p-3 rounded-2xl">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-semibold text-gray-900">
+                  <h4 className="text-xl font-semibold text-theme-primary">
                     Email Us
                   </h4>
-                  <p className="text-gray-600 mt-1">info@axythic.com</p>
+                  <p className="text-theme-muted mt-1">info@axythic.com</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="bg-purple-50 text-purple-600 p-3 rounded-2xl">
+                <div className="bg-purple-500/20 border border-purple-500/30 text-purple-400 p-3 rounded-2xl">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-semibold text-gray-900">
+                  <h4 className="text-xl font-semibold text-theme-primary">
                     Visit Us
                   </h4>
-                  <p className="text-gray-600 mt-1">
-                    Erode, Tamil nadu , india
+                  <p className="text-theme-muted mt-1">
+                    Erode, Tamil Nadu, India
                   </p>
                 </div>
               </div>
@@ -146,13 +155,13 @@ export default function ContactUs() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="bg-white p-8 rounded-3xl shadow-lg shadow-blue-900/5 border border-gray-100 relative">
+            <div className="bg-theme-card border border-theme p-8 rounded-3xl shadow-lg backdrop-blur-sm relative">
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label
                       htmlFor="firstName"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-theme-muted"
                     >
                       First Name
                     </label>
@@ -162,14 +171,14 @@ export default function ContactUs() {
                       required
                       value={formData.firstName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors outline-none bg-gray-50/50"
+                      className="w-full px-4 py-3 rounded-xl border border-theme bg-theme-card text-theme-primary placeholder-gray-600 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-colors outline-none"
                       placeholder="John"
                     />
                   </div>
                   <div className="space-y-2">
                     <label
                       htmlFor="lastName"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-theme-muted"
                     >
                       Last Name
                     </label>
@@ -179,7 +188,7 @@ export default function ContactUs() {
                       required
                       value={formData.lastName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors outline-none bg-gray-50/50"
+                      className="w-full px-4 py-3 rounded-xl border border-theme bg-theme-card text-theme-primary placeholder-gray-600 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-colors outline-none"
                       placeholder="Doe"
                     />
                   </div>
@@ -188,7 +197,7 @@ export default function ContactUs() {
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-theme-muted"
                   >
                     Email Address
                   </label>
@@ -198,7 +207,7 @@ export default function ContactUs() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors outline-none bg-gray-50/50"
+                    className="w-full px-4 py-3 rounded-xl border border-theme bg-theme-card text-theme-primary placeholder-gray-600 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-colors outline-none"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -206,7 +215,7 @@ export default function ContactUs() {
                 <div className="space-y-2">
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-theme-muted"
                   >
                     How can we help?
                   </label>
@@ -216,7 +225,7 @@ export default function ContactUs() {
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors outline-none resize-none bg-gray-50/50"
+                    className="w-full px-4 py-3 rounded-xl border border-theme bg-theme-card text-theme-primary placeholder-gray-600 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-colors outline-none resize-none"
                     placeholder="Tell us about your project..."
                   />
                 </div>
@@ -224,7 +233,7 @@ export default function ContactUs() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full bg-blue-600 text-white px-6 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 !text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
                 >
                   {status === "submitting" ? (
                     "Sending..."
@@ -246,14 +255,14 @@ export default function ContactUs() {
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     className={`absolute bottom-4 left-4 right-4 p-4 rounded-xl flex items-center gap-3 shadow-lg ${
                       status === "success"
-                        ? "bg-green-50 text-green-800 border-green-200"
-                        : "bg-red-50 text-red-800 border-red-200"
-                    } border`}
+                        ? "bg-green-500/20 text-green-300 border-green-500/30"
+                        : "bg-red-500/20 text-red-300 border-red-500/30"
+                    } border backdrop-blur-sm`}
                   >
                     {status === "success" ? (
-                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
                     ) : (
-                      <XCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                      <XCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
                     )}
                     <p className="text-sm font-medium">{snackbarMessage}</p>
                   </motion.div>

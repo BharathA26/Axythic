@@ -16,33 +16,44 @@ import {
 
 export default function Features() {
   return (
-    <section className="relative py-24 bg-white overflow-hidden">
-      {/* ── Background Pattern ── */}
-      <div className="absolute inset-0 max-w-[1400px] mx-auto opacity-40 mix-blend-multiply pointer-events-none">
+    <section className="relative py-32 bg-theme-page transition-colors duration-300 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 max-w-[1400px] mx-auto opacity-40 dark:opacity-20 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(#e5e7eb 1.5px, transparent 1.5px)",
+              "radial-gradient(var(--dot-color) 1.5px, transparent 1.5px)",
             backgroundSize: "24px 24px",
           }}
         />
-        {/* Soft radial mask so dots fade out at edges */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,white_100%)]" />
+        {/* Fade mask */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at center, transparent 0%, var(--bg-page) 100%)",
+          }}
+        />
       </div>
+      {/* Background orbs */}
+      <div className="absolute top-0 left-1/3 w-96 h-96 bg-emerald-500/8 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-blue-500/8 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-sm font-bold tracking-widest text-[#1a3c34] uppercase mb-3">
-            Powerful Integrations
-          </h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-4">
+            <span className="text-sm font-medium text-emerald-400 tracking-wide uppercase">
+              Powerful Integrations
+            </span>
+          </div>
+          <h3 className="text-4xl md:text-5xl font-extrabold text-theme-primary tracking-tight leading-tight">
             Connect everything. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a3c34] to-emerald-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">
               Build anything.
             </span>
           </h3>
-          <p className="mt-6 text-lg text-gray-500 max-w-2xl mx-auto">
+          <p className="mt-6 text-lg text-theme-muted max-w-2xl mx-auto font-light">
             Bring your favorite tools together in one beautiful, collaborative
             workspace. Monitor deployments, assign issues, and debug together in
             real-time.
@@ -56,46 +67,46 @@ export default function Features() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="col-span-1 lg:col-span-1 bg-white rounded-3xl border border-gray-100 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow relative overflow-hidden flex flex-col"
+            className="col-span-1 lg:col-span-1 bg-theme-card rounded-3xl border border-theme p-6 hover:bg-theme-card transition-all duration-300 relative overflow-hidden flex flex-col backdrop-blur-sm"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
-                <Command className="w-5 h-5 text-gray-600" />
+              <div className="w-10 h-10 rounded-xl bg-theme-card flex items-center justify-center border border-theme">
+                <Command className="w-5 h-5 text-theme-muted" />
               </div>
-              <h4 className="font-bold text-gray-900">Slash commands</h4>
+              <h4 className="font-bold text-theme-primary">Slash commands</h4>
             </div>
-            <p className="text-sm text-gray-500 mb-8">
+            <p className="text-sm text-theme-muted mb-8 font-light">
               Create meetings, issues and more in just seconds without leaving
               your flow.
             </p>
 
-            <div className="mt-auto bg-gray-50/50 rounded-2xl border border-gray-100 p-2 overflow-hidden">
-              <div className="flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-gray-100 shadow-sm mb-2">
-                <span className="text-gray-400 font-mono">/</span>
-                <span className="text-gray-800 text-sm font-medium">
+            <div className="mt-auto bg-theme-card rounded-2xl border border-theme p-2 overflow-hidden">
+              <div className="flex items-center gap-2 px-3 py-2 bg-theme-card rounded-xl border border-theme mb-2">
+                <span className="text-theme-muted font-mono">/</span>
+                <span className="text-gray-300 text-sm font-medium">
                   meet |
                 </span>
-                <span className="w-px h-4 bg-blue-500 animate-pulse" />
+                <span className="w-px h-4 bg-blue-400 animate-pulse" />
               </div>
               <div className="space-y-1">
-                <div className="flex items-center gap-3 px-3 py-2 bg-blue-50/50 rounded-xl cursor-default">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-gray-100 flex items-center justify-center shadow-sm">
-                    <MonitorPlay className="w-4 h-4 text-blue-600" />
+                <div className="flex items-center gap-3 px-3 py-2 bg-blue-500/10 rounded-xl cursor-default">
+                  <div className="w-8 h-8 rounded-lg bg-theme-card border border-theme flex items-center justify-center">
+                    <MonitorPlay className="w-4 h-4 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-900">Meet</p>
-                    <p className="text-[10px] text-gray-500">
+                    <p className="text-sm font-bold text-theme-primary">Meet</p>
+                    <p className="text-[10px] text-theme-muted">
                       Start a Google Meet
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 px-3 py-2 rounded-xl cursor-default opacity-60">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-gray-100 flex items-center justify-center shadow-sm">
-                    <Video className="w-4 h-4 text-blue-500" />
+                <div className="flex items-center gap-3 px-3 py-2 rounded-xl cursor-default opacity-50">
+                  <div className="w-8 h-8 rounded-lg bg-theme-card border border-theme flex items-center justify-center">
+                    <Video className="w-4 h-4 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-900">Zoom</p>
-                    <p className="text-[10px] text-gray-500">
+                    <p className="text-sm font-bold text-gray-300">Zoom</p>
+                    <p className="text-[10px] text-theme-muted">
                       Start a Zoom meeting
                     </p>
                   </div>
@@ -110,59 +121,59 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="col-span-1 lg:col-span-1 bg-white rounded-3xl border border-gray-100 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow relative overflow-hidden flex flex-col"
+            className="col-span-1 lg:col-span-1 bg-theme-card rounded-3xl border border-theme p-6 hover:bg-theme-card transition-all duration-300 relative overflow-hidden flex flex-col backdrop-blur-sm"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
-                <LayoutDashboard className="w-5 h-5 text-gray-600" />
+              <div className="w-10 h-10 rounded-xl bg-theme-card flex items-center justify-center border border-theme">
+                <LayoutDashboard className="w-5 h-5 text-theme-muted" />
               </div>
-              <h4 className="font-bold text-gray-900">Embeds</h4>
+              <h4 className="font-bold text-theme-primary">Embeds</h4>
             </div>
-            <p className="text-sm text-gray-500 mb-8">
+            <p className="text-sm text-theme-muted mb-8 font-light">
               Rich integrations that bring your project management and
               deployments into view.
             </p>
 
             <div className="mt-auto space-y-3">
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+              <div className="bg-theme-card rounded-2xl border border-theme p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-4 h-4 rounded bg-[#5e6ad2] flex items-center justify-center text-white text-[10px] font-bold">
+                  <div className="w-4 h-4 rounded bg-[#5e6ad2] flex items-center justify-center text-theme-primary text-[10px] font-bold">
                     L
                   </div>
-                  <span className="text-xs font-bold text-gray-500">
+                  <span className="text-xs font-bold text-theme-muted">
                     Linear
                   </span>
                 </div>
-                <p className="text-sm font-bold text-gray-900 mb-1">
+                <p className="text-sm font-bold text-gray-200 mb-1">
                   Update authentication flow
                 </p>
                 <div className="flex items-center gap-2">
-                  <span className="flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 bg-gray-100 text-gray-600 rounded-md">
+                  <span className="flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 bg-theme-card text-theme-muted rounded-md">
                     <CheckCircle2 className="w-3 h-3" /> Done
                   </span>
-                  <span className="text-[10px] text-gray-400">AXY-128</span>
+                  <span className="text-[10px] text-theme-muted">AXY-128</span>
                 </div>
               </div>
 
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+              <div className="bg-theme-card rounded-2xl border border-theme p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-4 h-4 rounded bg-black flex items-center justify-center text-white text-[10px] font-bold">
+                  <div className="w-4 h-4 rounded bg-white/90 flex items-center justify-center text-black text-[10px] font-bold">
                     ▲
                   </div>
-                  <span className="text-xs font-bold text-gray-500">
+                  <span className="text-xs font-bold text-theme-muted">
                     Vercel
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-bold text-gray-900">
+                  <p className="text-sm font-bold text-gray-200">
                     landing-page-v2
                   </p>
-                  <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />{" "}
+                  <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />{" "}
                     Ready
                   </span>
                 </div>
-                <p className="text-[10px] text-gray-400 mt-1">
+                <p className="text-[10px] text-theme-muted mt-1">
                   production • 2m ago
                 </p>
               </div>
@@ -175,20 +186,22 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="col-span-1 lg:col-span-1 bg-white rounded-3xl border border-gray-100 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow relative overflow-hidden flex flex-col"
+            className="col-span-1 lg:col-span-1 bg-theme-card rounded-3xl border border-theme p-6 hover:bg-theme-card transition-all duration-300 relative overflow-hidden flex flex-col backdrop-blur-sm"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
-                <GitPullRequest className="w-5 h-5 text-gray-600" />
+              <div className="w-10 h-10 rounded-xl bg-theme-card flex items-center justify-center border border-theme">
+                <GitPullRequest className="w-5 h-5 text-theme-muted" />
               </div>
-              <h4 className="font-bold text-gray-900">Activity channels</h4>
+              <h4 className="font-bold text-theme-primary">
+                Activity channels
+              </h4>
             </div>
-            <p className="text-sm text-gray-500 mb-8">
+            <p className="text-sm text-theme-muted mb-8 font-light">
               Stay in the loop with real-time streaming updates from GitHub and
               more.
             </p>
 
-            <div className="mt-auto bg-gray-50/50 rounded-2xl border border-gray-100 p-4 space-y-4">
+            <div className="mt-auto bg-theme-card rounded-2xl border border-theme p-4 space-y-4">
               {[
                 {
                   repo: "Axythic/frontend",
@@ -213,26 +226,26 @@ export default function Features() {
               ].map((push, i) => (
                 <div
                   key={i}
-                  className={`flex items-start gap-3 ${push.dim ? "opacity-50" : ""}`}
+                  className={`flex items-start gap-3 ${push.dim ? "opacity-40" : ""}`}
                 >
-                  <Github className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                  <Github className="w-4 h-4 text-theme-muted mt-0.5 flex-shrink-0" />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between mb-0.5">
-                      <p className="text-xs font-semibold text-gray-900 truncate pr-2">
+                      <p className="text-xs font-semibold text-gray-300 truncate pr-2">
                         {push.repo}
                       </p>
-                      <span className="text-[10px] text-gray-400 flex-shrink-0">
+                      <span className="text-[10px] text-theme-muted flex-shrink-0">
                         {push.time}
                       </span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       {push.alert && (
-                        <AlertCircle className="w-3 h-3 text-red-500 flex-shrink-0" />
+                        <AlertCircle className="w-3 h-3 text-red-400 flex-shrink-0" />
                       )}
-                      <span className="text-[10px] font-mono text-gray-500 border border-gray-200 bg-white px-1 rounded">
+                      <span className="text-[10px] font-mono text-theme-muted border border-theme bg-theme-card px-1 rounded">
                         {push.hash}
                       </span>
-                      <span className="text-xs justify-self-start text-gray-600 truncate">
+                      <span className="text-xs justify-self-start text-theme-muted truncate">
                         {push.desc}
                       </span>
                     </div>
@@ -248,17 +261,17 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="col-span-1 md:col-span-2 bg-white rounded-3xl border border-gray-100 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow relative overflow-hidden"
+            className="col-span-1 md:col-span-2 bg-theme-card rounded-3xl border border-theme p-6 hover:bg-theme-card transition-all duration-300 relative overflow-hidden backdrop-blur-sm"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
-                <TerminalSquare className="w-5 h-5 text-gray-600" />
+              <div className="w-10 h-10 rounded-xl bg-theme-card flex items-center justify-center border border-theme">
+                <TerminalSquare className="w-5 h-5 text-theme-muted" />
               </div>
-              <h4 className="font-bold text-gray-900">
+              <h4 className="font-bold text-theme-primary">
                 Collaborative debugging
               </h4>
             </div>
-            <p className="text-sm text-gray-500 mb-6">
+            <p className="text-sm text-theme-muted mb-6 font-light">
               Share your screen and collaboratively debug code together with
               multi-player live cursors.
             </p>
@@ -331,7 +344,7 @@ export default function Features() {
                 className="absolute top-16 left-32 flex flex-col items-start pointer-events-none"
               >
                 <MousePointer2 className="w-4 h-4 text-blue-400 fill-blue-400 drop-shadow-md origin-top-left -rotate-12" />
-                <div className="bg-blue-400 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md mt-1 shadow-sm whitespace-nowrap">
+                <div className="bg-blue-400 text-theme-primary text-[9px] font-bold px-1.5 py-0.5 rounded-md mt-1 shadow-sm whitespace-nowrap">
                   Sarah J.
                 </div>
               </motion.div>
@@ -347,7 +360,7 @@ export default function Features() {
                 className="absolute top-24 left-64 flex flex-col items-start pointer-events-none"
               >
                 <MousePointer2 className="w-4 h-4 text-emerald-400 fill-emerald-400 drop-shadow-md origin-top-left -rotate-12" />
-                <div className="bg-emerald-400 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md mt-1 shadow-sm whitespace-nowrap">
+                <div className="bg-emerald-400 text-theme-primary text-[9px] font-bold px-1.5 py-0.5 rounded-md mt-1 shadow-sm whitespace-nowrap">
                   Mike T.
                 </div>
               </motion.div>
@@ -360,33 +373,33 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="col-span-1 md:col-span-1 bg-white rounded-3xl border border-gray-100 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow relative overflow-hidden flex flex-col"
+            className="col-span-1 md:col-span-1 bg-theme-card rounded-3xl border border-theme p-6 hover:bg-theme-card transition-all duration-300 relative overflow-hidden flex flex-col backdrop-blur-sm"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
-                <MessageSquare className="w-5 h-5 text-gray-600" />
+              <div className="w-10 h-10 rounded-xl bg-theme-card flex items-center justify-center border border-theme">
+                <MessageSquare className="w-5 h-5 text-theme-muted" />
               </div>
-              <h4 className="font-bold text-gray-900">AI summarize</h4>
+              <h4 className="font-bold text-theme-primary">AI summarize</h4>
             </div>
-            <p className="text-sm text-gray-500 mb-6">
+            <p className="text-sm text-theme-muted mb-6 font-light">
               Get the gist, without the fluff. Let AI catch you up on missed
               discussions instantly.
             </p>
 
             <div className="mt-auto space-y-4">
               <div className="flex gap-3">
-                <div className="w-6 h-6 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center text-blue-600 text-[10px] font-bold">
+                <div className="w-6 h-6 rounded-full bg-blue-500/20 flex-shrink-0 flex items-center justify-center text-blue-400 text-[10px] font-bold">
                   R
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className="text-xs font-bold text-gray-900">
+                    <span className="text-xs font-bold text-gray-300">
                       Robert Fox
                     </span>
-                    <span className="text-[9px] text-gray-400">9:51 PM</span>
+                    <span className="text-[9px] text-theme-muted">9:51 PM</span>
                   </div>
-                  <div className="bg-gray-50 rounded-xl rounded-tl-none p-2 border border-gray-100">
-                    <p className="text-xs text-gray-600 line-clamp-2">
+                  <div className="bg-theme-card rounded-xl rounded-tl-none p-2 border border-theme">
+                    <p className="text-xs text-theme-muted line-clamp-2">
                       Hey, do you think we should implement the caching layer
                       before launching?
                     </p>
@@ -395,18 +408,18 @@ export default function Features() {
               </div>
 
               <div className="flex gap-3">
-                <div className="w-6 h-6 rounded-full bg-purple-100 flex-shrink-0 flex items-center justify-center text-purple-600 text-[10px] font-bold">
+                <div className="w-6 h-6 rounded-full bg-purple-500/20 flex-shrink-0 flex items-center justify-center text-purple-400 text-[10px] font-bold">
                   T
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className="text-xs font-bold text-gray-900">
+                    <span className="text-xs font-bold text-gray-300">
                       Tejas R.
                     </span>
-                    <span className="text-[9px] text-gray-400">9:52 PM</span>
+                    <span className="text-[9px] text-theme-muted">9:52 PM</span>
                   </div>
-                  <div className="bg-gray-50 rounded-xl rounded-tl-none p-2 border border-gray-100">
-                    <p className="text-xs text-gray-600 line-clamp-2">
+                  <div className="bg-theme-card rounded-xl rounded-tl-none p-2 border border-theme">
+                    <p className="text-xs text-theme-muted line-clamp-2">
                       Yep! We definitely should — I think Redis is best.
                     </p>
                   </div>
@@ -415,7 +428,7 @@ export default function Features() {
 
               {/* AI absolute button floating over chats */}
               <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none">
-                <button className="flex items-center gap-2 bg-[#1a3c34] text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg pointer-events-auto hover:bg-[#112a24] transition-colors">
+                <button className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg shadow-blue-500/20 pointer-events-auto hover:from-blue-500 hover:to-indigo-500 transition-all">
                   <Sparkles className="w-3.5 h-3.5 text-yellow-300" /> Auto
                   Summarize
                 </button>

@@ -3,7 +3,10 @@ import { ArrowRight } from "lucide-react";
 
 export default function CTA() {
   return (
-    <section className="py-24 relative overflow-hidden bg-white">
+    <section
+      className="py-24 relative overflow-hidden transition-colors duration-300"
+      style={{ backgroundColor: "var(--bg-page)" }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 rounded-[2rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-blue-900/20"

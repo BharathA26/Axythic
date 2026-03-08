@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -34,26 +34,32 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 bg-white relative">
+    <section id="faq" className="py-32 bg-theme-page transition-colors duration-300 relative overflow-hidden">
+      {/* Background orb */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
+
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <motion.h2
-            className="text-sm font-bold text-blue-600 uppercase tracking-wider mb-2"
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            FAQ
-          </motion.h2>
+            <Sparkles className="w-4 h-4 text-blue-400" />
+            <span className="text-sm font-medium text-blue-400 tracking-wide uppercase">
+              FAQ
+            </span>
+          </motion.div>
           <motion.h3
-            className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight"
+            className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
             Frequently Asked{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
               Questions
             </span>
           </motion.h3>
@@ -66,20 +72,28 @@ export default function FAQ() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className={`border rounded-2xl overflow-hidden transition-all duration-300 ${openIndex === idx ? "bg-blue-50/50 border-blue-200 shadow-sm" : "bg-white border-gray-200 hover:border-blue-300"}`}
+              transition={{ delay: idx * 0.08 }}
+              className={`border rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-sm ${
+                openIndex === idx
+                  ? "bg-theme-card border-blue-500/30 shadow-lg shadow-blue-500/5"
+                  : "bg-theme-card border-theme hover:bg-theme-card hover:border-white/20"
+              }`}
             >
               <button
                 className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none"
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
               >
                 <span
-                  className={`font-semibold text-lg transition-colors ${openIndex === idx ? "text-blue-900" : "text-gray-900"}`}
+                  className={`font-semibold text-lg transition-colors ${
+                    openIndex === idx ? "text-theme-primary" : "text-gray-300"
+                  }`}
                 >
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`text-gray-400 transition-transform duration-300 ${openIndex === idx ? "rotate-180 text-blue-600" : ""}`}
+                  className={`text-theme-muted transition-transform duration-300 flex-shrink-0 ml-4 ${
+                    openIndex === idx ? "rotate-180 text-blue-400" : ""
+                  }`}
                 />
               </button>
               <AnimatePresence>
@@ -91,7 +105,7 @@ export default function FAQ() {
                     transition={{ duration: 0.3 }}
                     className="px-6 pb-5 overflow-hidden"
                   >
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-theme-muted leading-relaxed font-light">
                       {faq.answer}
                     </p>
                   </motion.div>

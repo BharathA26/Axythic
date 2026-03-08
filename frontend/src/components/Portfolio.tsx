@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 
 export default function Portfolio() {
   const projects = [
@@ -60,15 +60,15 @@ export default function Portfolio() {
       title: "HRM Platform",
       category: "Human Resources",
       description:
-        "A streamlined human resource management system to handle employee records, onboarding workflows, leave tracking, and payroll integrations.",
+        "A premium recruitment and human resource management system featuring candidate tracking, personnel directories, and workforce analytics.",
       image:
         "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800",
-      gradient: "from-blue-600 to-cyan-500",
-      url: "#",
+      gradient: "from-blue-600 to-indigo-600",
+      url: "/hrm/dashboard",
       modules: [
-        { label: "Overview", endpoint: "#" },
-        { label: "Employees", endpoint: "#" },
-        { label: "Leave System", endpoint: "#" },
+        { label: "Dashboard", endpoint: "/hrm/dashboard" },
+        { label: "Personnel", endpoint: "/hrm/personnel" },
+        { label: "Candidate Profile", endpoint: "/hrm/profile" },
       ],
     },
     {
@@ -104,27 +104,37 @@ export default function Portfolio() {
   ];
 
   return (
-    <section id="portfolio" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="portfolio"
+      className="py-32 bg-theme-page transition-colors duration-300 relative overflow-hidden"
+    >
+      {/* Background orbs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/8 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/8 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center justify-center text-center mb-16 gap-6">
           <div className="max-w-2xl flex flex-col items-center">
-            <motion.h2
-              className="text-sm font-bold text-blue-600 uppercase tracking-wider mb-2"
+            <motion.div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              Our Work
-            </motion.h2>
+              <Sparkles className="w-4 h-4 text-indigo-400" />
+              <span className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
+                Our Work
+              </span>
+            </motion.div>
             <motion.h3
-              className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight"
+              className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
               Featured{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
                 Projects
               </span>
             </motion.h3>
@@ -132,7 +142,7 @@ export default function Portfolio() {
         </div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
@@ -145,58 +155,43 @@ export default function Portfolio() {
           }}
         >
           {projects.map((project, index) => {
-            const isExternalUrl = project.url.startsWith("http");
-
             const cardContent = (
               <>
-                <div className="relative h-64 overflow-hidden">
-                  <div className="absolute inset-0 bg-gray-900/20 group-hover:bg-transparent transition-colors z-10" />
+                <div className="relative h-56 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/80 via-transparent to-transparent z-10" />
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transform group-hover:scale-110 group-hover:rotate-1 transition-transform duration-700"
                   />
                   <div
-                    className={`absolute top-4 left-4 z-20 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${project.gradient} shadow-md`}
+                    className={`absolute top-4 left-4 z-20 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${project.gradient} shadow-md`}
+                    style={{ color: "white" }}
                   >
                     {project.category}
                   </div>
                 </div>
                 <div className="p-6">
-                  <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  <h4 className="text-xl font-bold text-theme-primary mb-2 group-hover:text-blue-400 transition-colors">
                     {project.title}
                   </h4>
-                  <p className="text-gray-600 leading-relaxed text-sm">
+                  <p className="text-theme-muted leading-relaxed text-sm font-light">
                     {project.description}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    {/* Modules */}
-                    {project.modules.map((module, moduleIndex) => {
-                      const isExternalModule =
-                        module.endpoint.startsWith("http") ||
-                        module.endpoint === "#";
-                      return (
-                        <div key={`${project.title}-${moduleIndex}`}>
-                          {isExternalModule ? (
-                            <a
-                              href={module.endpoint}
-                              onClick={(event) => event.stopPropagation()}
-                              className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition-colors inline-block"
-                            >
-                              {module.label}
-                            </a>
-                          ) : (
-                            <Link
-                              to={module.endpoint}
-                              onClick={(event) => event.stopPropagation()}
-                              className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition-colors inline-block"
-                            >
-                              {module.label}
-                            </Link>
-                          )}
-                        </div>
-                      );
-                    })}
+                    {project.modules.map((module, moduleIndex) => (
+                      <div key={`${project.title}-${moduleIndex}`}>
+                        <a
+                          href={module.endpoint}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(event) => event.stopPropagation()}
+                          className="text-xs font-medium px-3 py-1 rounded-full bg-theme-card text-theme-muted border border-theme hover:bg-theme-card hover:text-theme-primary transition-all inline-block"
+                        >
+                          {module.label}
+                        </a>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </>
@@ -213,25 +208,16 @@ export default function Portfolio() {
                     transition: { duration: 0.6, ease: "easeOut" },
                   },
                 }}
-                className="group rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 block relative hover:ring-2 hover:ring-blue-500/20"
+                className="group rounded-2xl overflow-hidden bg-theme-card border border-theme hover:bg-theme-card hover:border-white/20 transition-all duration-500 transform hover:-translate-y-2 block relative backdrop-blur-sm"
               >
-                {isExternalUrl ? (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block h-full cursor-pointer"
-                  >
-                    {cardContent}
-                  </a>
-                ) : (
-                  <Link
-                    to={project.url}
-                    className="block h-full cursor-pointer"
-                  >
-                    {cardContent}
-                  </Link>
-                )}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block h-full cursor-pointer"
+                >
+                  {cardContent}
+                </a>
               </motion.div>
             );
           })}

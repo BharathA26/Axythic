@@ -1,15 +1,20 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Code, Smartphone, Monitor } from "lucide-react";
 import MagneticButton from "./MagneticButton";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Hero() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
   const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
+
   return (
     <section
-      className="pt-32 pb-8 px-4 relative flex flex-col items-center justify-center overflow-hidden"
+      className="pt-32 pb-8 px-4 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-300"
       id="hero"
+      style={{ backgroundColor: "var(--bg-page)" }}
     >
       {/* Background Gradient Elements */}
       <motion.div
@@ -26,7 +31,16 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-semibold mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8 border transition-colors duration-300"
+          style={{
+            backgroundColor: isDark
+              ? "rgba(59,130,246,0.1)"
+              : "rgba(239,246,255,1)",
+            borderColor: isDark
+              ? "rgba(59,130,246,0.2)"
+              : "rgba(219,234,254,1)",
+            color: isDark ? "#93c5fd" : "#1d4ed8",
+          }}
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -36,7 +50,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight"
+          className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight transition-colors duration-300"
+          style={{ color: "var(--text-primary)" }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
@@ -49,7 +64,8 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto"
+          className="text-lg md:text-xl mb-10 max-w-2xl mx-auto transition-colors duration-300"
+          style={{ color: "var(--text-muted)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
@@ -67,26 +83,38 @@ export default function Hero() {
           <MagneticButton
             href="#contact-us"
             as="a"
-            className="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-500 hover:to-indigo-500 hover:shadow-lg hover:shadow-blue-600/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
           >
             Start Your Project <ArrowRight className="w-5 h-5" />
           </MagneticButton>
           <MagneticButton
             href="#portfolio"
             as="a"
-            className="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg border border-gray-200 hover:bg-gray-50 transition-all text-center"
+            className="px-8 py-4 rounded-full font-semibold text-lg border transition-all text-center hover:-translate-y-0.5 transform duration-200"
+            style={{
+              backgroundColor: "var(--bg-card)",
+              borderColor: "var(--border-color)",
+              color: "var(--text-primary)",
+            }}
           >
             View Our Work
           </MagneticButton>
         </motion.div>
       </div>
 
-      {/* Floating Animated Icons representing Web, Mobile, Software */}
+      {/* Floating Animated Icons */}
       <div className="absolute top-1/2 left-10 md:left-20 xl:left-40 hidden lg:block opacity-60">
         <motion.div
           animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="bg-white p-4 rounded-2xl shadow-xl shadow-blue-900/5 border border-gray-100"
+          className="p-4 rounded-2xl border transition-colors duration-300"
+          style={{
+            backgroundColor: "var(--bg-card)",
+            borderColor: "var(--border-color)",
+            boxShadow: isDark
+              ? "0 8px 32px rgba(0,0,0,0.4)"
+              : "0 8px 32px rgba(0,0,0,0.06)",
+          }}
         >
           <Monitor className="w-8 h-8 text-blue-500" />
         </motion.div>
@@ -100,7 +128,14 @@ export default function Hero() {
             ease: "easeInOut",
             delay: 1,
           }}
-          className="bg-white p-4 rounded-2xl shadow-xl shadow-indigo-900/5 border border-gray-100"
+          className="p-4 rounded-2xl border transition-colors duration-300"
+          style={{
+            backgroundColor: "var(--bg-card)",
+            borderColor: "var(--border-color)",
+            boxShadow: isDark
+              ? "0 8px 32px rgba(0,0,0,0.4)"
+              : "0 8px 32px rgba(0,0,0,0.06)",
+          }}
         >
           <Smartphone className="w-8 h-8 text-indigo-500" />
         </motion.div>
@@ -114,7 +149,14 @@ export default function Hero() {
             ease: "easeInOut",
             delay: 2,
           }}
-          className="bg-white p-4 rounded-2xl shadow-xl shadow-purple-900/5 border border-gray-100"
+          className="p-4 rounded-2xl border transition-colors duration-300"
+          style={{
+            backgroundColor: "var(--bg-card)",
+            borderColor: "var(--border-color)",
+            boxShadow: isDark
+              ? "0 8px 32px rgba(0,0,0,0.4)"
+              : "0 8px 32px rgba(0,0,0,0.06)",
+          }}
         >
           <Code className="w-8 h-8 text-purple-500" />
         </motion.div>

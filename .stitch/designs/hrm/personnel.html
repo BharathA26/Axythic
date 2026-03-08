@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Axythic Personnel Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2766ec",
+                        "background-light": "#ffffff",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header / Top Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-2xl">polymer</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Axythic</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">notifications</span>
+</button>
+<div class="h-10 w-10 overflow-hidden rounded-full border-2 border-primary/20">
+<img class="h-full w-full object-cover" data-alt="Professional portrait of Philipp Davidson" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTAO_dn-nE9mDdMKB2FVxlNQEoa7KZZoDKrOP4bQmrHYQ4m4-nV_aQpzVBMM__KMYYCsG0SJMifOTXcohHNXjTvD91Q5_hFcwpjjgsXPUtoefSCwgdzkkxq9zukiKD5Y3TR8Fd3JVAlQ5cz8cncsgfgzA8o10v2PbdGCrkxZ1uxp1Pv-U8_L2kn95FJHlyR7c3uxePCELwDh-4lic6nz71R_uzs664YwhJ3oQjKYe5vJ0A-e8WC1LB65zyF5XY603hVVSReG2rGK4"/>
+</div>
+</div>
+</header>
+<!-- Navigation Tabs -->
+<nav class="bg-white dark:bg-background-dark px-4 pt-2">
+<div class="flex gap-6 overflow-x-auto hide-scrollbar border-b border-slate-100 dark:border-slate-800">
+<a class="flex flex-col items-center border-b-2 border-transparent pb-3 pt-2 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex flex-col items-center border-b-2 border-primary pb-3 pt-2 text-primary" href="#">
+<span class="text-sm font-semibold">Personnel</span>
+</a>
+<a class="flex flex-col items-center border-b-2 border-transparent pb-3 pt-2 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="text-sm font-semibold">Applications</span>
+</a>
+<a class="flex flex-col items-center border-b-2 border-transparent pb-3 pt-2 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="text-sm font-semibold">Talent Pool</span>
+</a>
+</div>
+</nav>
+<!-- Directory Header -->
+<main class="flex-1 px-4 py-6">
+<div class="mb-6 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight">Personnel</h2>
+<button class="flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-indigo-600 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">add</span>
+                        Add Employee
+                    </button>
+</div>
+<!-- Search Bar Component -->
+<div class="relative w-full">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="h-12 w-full rounded-xl border-none bg-slate-100 dark:bg-slate-800 pl-12 pr-4 text-slate-900 dark:text-white placeholder:text-slate-500 focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Search by name, role, or department..." type="text"/>
+</div>
+<!-- Filter Pills -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+<button class="flex items-center gap-2 shrink-0 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-300">
+                        Department
+                        <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex items-center gap-2 shrink-0 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-300">
+                        Status
+                        <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex items-center gap-2 shrink-0 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-300">
+                        Location
+                        <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Employee List (Mobile Cards Pattern) -->
+<div class="flex flex-col gap-4">
+<!-- Employee Card 1 -->
+<div class="rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full border border-slate-100 dark:border-slate-800 overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="Avatar of Alex Morgan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDoC5aTDx8HnpLAu5gyNhK_MS8oDOt9iYKLu3nPWsFIy2EFUFmI0RKI_3wi7FremAXBmfeV463Hr8nyWFT-TYGkHDr5B8qzn6zDsoa22tUkqAbF-fyBFuWYSmJkG1-THEMwZUpyOHbtKqrhvbuMMTRuzYBPNrEUtmDL8iUoXcGGZ9lJnsL7Gyti8WrQ1K6NVdSX_el6FSEtVS5L-q8VYuDNUpnWm2FBOO0ea_tAW9Bctvwciy5SO3nOHW3ibPr4U4iLQpzXUeSrro"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Alex Morgan</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Senior Product Designer</p>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="mt-4 flex flex-wrap items-center gap-3">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 dark:bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                            Active
+                        </span>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">business_center</span>
+                            Design
+                        </div>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            London, UK
+                        </div>
+</div>
+</div>
+<!-- Employee Card 2 -->
+<div class="rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full border border-slate-100 dark:border-slate-800 overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="Avatar of Sarah Jenkins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP_cBkxVVS09wOed6KDr6hFCtpp90mEUTIGTZ5r8d6lonHk-CqY87nJD2451NEDUEE6YyNKAXfI5TeStBwdhdZYmXKvGS0rGIPS8kQ-EiAu5AXnhv13ljXFwR__V4cfkniez7DOAMWkg5GwhoFqqQcEQrSmaSScFY9qd08UJRC7X-EYeaBVb39RJRQOaKCdD1PbwDlcxk_m03O86EPbreG884JABaZJNUCiGjflx7gSxGoBFfHRvQmjN39KnLtojwIKsGt1lXMEWI"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Sarah Jenkins</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Engineering Lead</p>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="mt-4 flex flex-wrap items-center gap-3">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            Remote
+                        </span>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">business_center</span>
+                            Engineering
+                        </div>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Berlin, DE
+                        </div>
+</div>
+</div>
+<!-- Employee Card 3 -->
+<div class="rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full border border-slate-100 dark:border-slate-800 overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="Avatar of Robert Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWMgoH4rImdYsAtjcty7EP43j2be21gfTKSZTZqkEir8UbL9RnjWdL9n70OmxRGZaB-16gf2iU8aBpHsaOz5IRfaK3YuECDVckZtfzfzRH-Q6XLqNJQ_FHUDwf-GoevM9VkWZCkqZ7z5EUNmOuJFaYzfVViK19YMGJ-YC7ag9dO7h24etRhPWX15Iljg3CMFVt7H1bHupsjBGM7ZRcMnOz-828Y3BJ3jizZCPsADEeF71C4ae_zNHRo4SYdPLuU3QdohiXcbY9Nd4"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Robert Chen</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">HR Manager</p>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="mt-4 flex flex-wrap items-center gap-3">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 dark:bg-amber-500/10 px-2.5 py-0.5 text-xs font-semibold text-amber-700 dark:text-amber-400">
+<span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
+                            On Leave
+                        </span>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">business_center</span>
+                            People Ops
+                        </div>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Singapore, SG
+                        </div>
+</div>
+</div>
+<!-- Employee Card 4 -->
+<div class="rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full border border-slate-100 dark:border-slate-800 overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="Avatar of Elena Rodriguez" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjRBfGVb0VHkcy232AtIaV-7RC8EJJdGjMMRfA0EzuWMFZiCJTJGqi50-lJSuZpV52yPSP2UMnqrYcljMrTMzELmmWJ58236GJ3I03C8-EJ3yklJuRnKDrbgYEObVcZd6ObqxuoOlpKNVffCq1IPo8bnZweJHaFW_8GcuTW1ycN1tQ677QYNof4VzDnzA8tz241IxA7i2ObaIHst6rt6q2pejGFkmSbNd4pKVcx2QAmYcbMRFsrtTCbSnN1E6QMdeONQ3Qjb8qdcE"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Elena Rodriguez</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Marketing Strategist</p>
+</div>
+</div>
+<button class="text-slate-400">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="mt-4 flex flex-wrap items-center gap-3">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 dark:bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                            Active
+                        </span>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">business_center</span>
+                            Marketing
+                        </div>
+<div class="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Madrid, ES
+                        </div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-8 flex items-center justify-between px-2">
+<span class="text-sm text-slate-500 dark:text-slate-400 font-medium">1-4 of 254 employees</span>
+<div class="flex gap-2">
+<button class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile) -->
+<footer class="sticky bottom-0 z-50 border-t border-slate-100 dark:border-slate-800 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md pb-safe">
+<div class="flex items-center justify-around px-2 py-2">
+<a class="flex flex-col items-center gap-1 px-3 py-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">grid_view</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 px-3 py-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl fill-1">group</span>
+<span class="text-[10px] font-bold">Personnel</span>
+</a>
+<a class="flex flex-col items-center gap-1 px-3 py-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">description</span>
+<span class="text-[10px] font-medium">Apps</span>
+</a>
+<a class="flex flex-col items-center gap-1 px-3 py-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">event</span>
+<span class="text-[10px] font-medium">Events</span>
+</a>
+</div>
+</footer>
+</div>
+</body></html>
