@@ -32,7 +32,7 @@ export default function ContactUs() {
     setStatus("submitting");
 
     try {
-      const response = await fetch("https://axythic.onrender.com/api/contact", {
+      const response = await fetch("https://axythicbackend.vercel.app/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

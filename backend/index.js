@@ -78,6 +78,13 @@ app.post("/api/contact", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Backend server started on port ${PORT}`);
-});
+
+// Export the app for serverless platforms like Vercel.
+module.exports = app;
+
+// Start a local server only when not running on Vercel.
+if (process.env.VERCEL !== "1") {
+  app.listen(PORT, () => {
+    console.log(`Backend server started on port ${PORT}`);
+  });
+}
