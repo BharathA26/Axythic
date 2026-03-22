@@ -1,0 +1,21 @@
+/* Custom CSS for 3D Portfolio Page */
+
+.portfolio-wrapper .glass-card {
+  background: rgba(53, 53, 52, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portfolio-wrapper .hero-glow {
+  background: radial-gradient(circle at center, rgba(255, 45, 45, 0.15) 0%, transparent 70%);
+}
+
+.portfolio-wrapper .text-glow {
+  text-shadow: 0 0 25px rgba(255, 45, 45, 0.5);
+}
+
+/* Base resets or specific tweaks to keep scrolling clean */
+.portfolio-wrapper html {
+  scroll-behavior: smooth;
+}

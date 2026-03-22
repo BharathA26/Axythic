@@ -8,6 +8,8 @@ import {
 import Home from "./pages/Home";
 import FinanceDashboard from "./pages/FinanceDashboard";
 import Shopcart from "./pages/Shopcart";
+import Portfolio3D from "./pages/Portfolio3D";
+import FitnessApp from "./pages/FitnessApp";
 
 import EduQuestLayout from "./pages/EduQuestLMS/Layout";
 import StudentDashboard from "./pages/EduQuestLMS/StudentDashboard";
@@ -50,6 +52,12 @@ function App() {
 
             {/* Shopcart */}
             <Route path="/shopcart" element={<Shopcart />} />
+
+            {/* Portfolio 3D */}
+            <Route path="/portfolio" element={<Portfolio3D />} />
+
+            {/* Fitness App */}
+            <Route path="/fitness-app" element={<FitnessApp />} />
 
             {/* EduQuest LMS */}
             <Route path="/eduquest" element={<EduQuestLayout />}>

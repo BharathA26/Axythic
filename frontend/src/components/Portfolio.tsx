@@ -79,11 +79,11 @@ export default function Portfolio() {
       image:
         "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800",
       gradient: "from-fuchsia-600 to-pink-500",
-      url: "#",
+      url: "/portfolio",
       modules: [
-        { label: "Hero Animation", endpoint: "#" },
-        { label: "3D Models", endpoint: "#" },
-        { label: "Interactive Flow", endpoint: "#" },
+        { label: "Hero Animation", endpoint: "/portfolio" },
+        { label: "3D Models", endpoint: "/portfolio" },
+        { label: "Interactive Flow", endpoint: "/portfolio" },
       ],
     },
     {
@@ -94,11 +94,11 @@ export default function Portfolio() {
       image:
         "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
       gradient: "from-orange-500 to-rose-500",
-      url: "#",
+      url: "/fitness-app",
       modules: [
-        { label: "iOS App", endpoint: "#" },
-        { label: "Android App", endpoint: "#" },
-        { label: "UI Kit", endpoint: "#" },
+        { label: "Dashboard", endpoint: "/fitness-app" },
+        { label: "Workout",   endpoint: "/fitness-app#screens" },
+        { label: "Analytics", endpoint: "/fitness-app#screens" },
       ],
     },
   ];
