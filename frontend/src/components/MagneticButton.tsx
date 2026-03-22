@@ -18,7 +18,7 @@ export default function MagneticButton({
   as: Component = "button",
   href,
 }: MagneticButtonProps) {
-  const ref = useRef<HTMLButtonElement | HTMLAnchorElement | any>(null);
+  const ref = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const controls = useAnimation();
 

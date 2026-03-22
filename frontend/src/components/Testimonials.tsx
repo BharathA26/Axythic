@@ -79,6 +79,7 @@ const TestimonialCard = ({ item }: { item: Testimonial }) => {
         <img
           src={item.image}
           alt={item.name}
+          loading="lazy"
           className="w-11 h-11 rounded-full object-cover border border-white/20"
         />
         <div className="flex flex-col">

@@ -12,6 +12,7 @@ import {
   Check,
   X,
   Link as LinkIcon,
+  Menu,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { View } from "./index";
@@ -145,7 +146,7 @@ function NotificationsPanel({ onClose }: { onClose: () => void }) {
     setNotifs((ns) => ns.map((n) => (n.id === id ? { ...n, read: true } : n)));
 
   return (
-    <div className="absolute right-0 top-12 w-96 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden">
+    <div className="absolute right-0 top-12 w-80 sm:w-96 max-w-[calc(100vw-1rem)] bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden">
       <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
         <div>
           <h3 className="font-bold text-gray-900">Notifications</h3>
@@ -228,7 +229,7 @@ function MessagesPanel({ onClose }: { onClose: () => void }) {
     );
 
   return (
-    <div className="absolute right-0 top-12 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden">
+    <div className="absolute right-0 top-12 w-72 sm:w-80 max-w-[calc(100vw-1rem)] bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden">
       <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
         <div>
           <h3 className="font-bold text-gray-900">Messages</h3>
@@ -389,11 +390,13 @@ function ShareModal({ onClose }: { onClose: () => void }) {
 interface HeaderProps {
   breadcrumb?: string;
   onNavigate?: (view: View) => void;
+  onMenuClick?: () => void;
 }
 
 export default function Header({
   breadcrumb = "Dashboard",
   onNavigate,
+  onMenuClick,
 }: HeaderProps) {
   const [openPanel, setOpenPanel] = useState<
     "notifs" | "messages" | "profile" | null
@@ -425,9 +428,17 @@ export default function Header({
 
   return (
     <>
-      <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 md:px-8 z-40">
-        {/* Breadcrumbs */}
+      <header className="h-16 md:h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 md:px-8 z-40">
+        {/* Left: hamburger (mobile) + breadcrumbs */}
         <div className="flex items-center gap-3">
+          {/* Hamburger — only on mobile */}
+          <button
+            onClick={onMenuClick}
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
           <div className="flex items-center gap-1 text-gray-400">
             <Link
               to="/"

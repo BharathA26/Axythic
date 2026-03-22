@@ -1,44 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import CodeDemo from "../components/CodeDemo";
 import OurStory from "../components/OurStory";
 import VisionMission from "../components/VisionMission";
 import Features from "../components/Features";
-
 import Portfolio from "../components/Portfolio";
 import Testimonials from "../components/Testimonials";
 import FAQ from "../components/FAQ";
 import ContactUs from "../components/ContactUs";
-// import CTA from "../components/CTA";
-import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
-import PrivacyPolicy from "../components/PrivacyPolicy";
-import TermsAndConditions from "../components/TermsAndConditions";
 import BackToTop from "../components/BackToTop";
 
 function Home() {
-  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
-  const [isTermsOpen, setIsTermsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      // If there is any hash navigation (like clicking 'Our Story'), close the privacy policy
-      if (window.location.hash) {
-        setIsPrivacyPolicyOpen(false);
-        setIsTermsOpen(false);
-        // Add a slight delay to allow React to render the main page before scrolling
-        setTimeout(() => {
-          const elementId = window.location.hash.substring(1);
-          const element = document.getElementById(elementId);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100);
-      }
-    };
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -46,50 +21,20 @@ function Home() {
       style={{ backgroundColor: "var(--bg-page)" }}
     >
       <Navbar />
-      {isPrivacyPolicyOpen ? (
-        <main className="flex-grow">
-          <PrivacyPolicy
-            onBack={() => {
-              setIsPrivacyPolicyOpen(false);
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          />
-        </main>
-      ) : isTermsOpen ? (
-        <main className="flex-grow">
-          <TermsAndConditions
-            onBack={() => {
-              setIsTermsOpen(false);
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          />
-        </main>
-      ) : (
-        <main className="flex-grow">
-          <Hero />
-          <CodeDemo />
-          <OurStory />
-          <VisionMission />
-          <Features />
-          {/* <TechStack /> */}
-          <Portfolio />
-          <Testimonials />
-          <FAQ />
-          <ContactUs />
-          {/* <CTA /> */}
-        </main>
-      )}
+      <main className="flex-grow">
+        <Hero />
+        <CodeDemo />
+        <OurStory />
+        <VisionMission />
+        <Features />
+        <Portfolio />
+        <Testimonials />
+        <FAQ />
+        <ContactUs />
+      </main>
       <Footer
-        onShowPrivacyPolicy={() => {
-          setIsTermsOpen(false);
-          setIsPrivacyPolicyOpen(true);
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
-        onShowTerms={() => {
-          setIsPrivacyPolicyOpen(false);
-          setIsTermsOpen(true);
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
+        onShowPrivacyPolicy={() => navigate("/privacy-policy")}
+        onShowTerms={() => navigate("/terms")}
       />
       <BackToTop />
     </div>

@@ -13,13 +13,13 @@ export default function Portfolio() {
       url: "/axythicfin/dashboard",
       modules: [
         { label: "Dashboard", endpoint: "/axythicfin/dashboard" },
-        { label: "Quotation", endpoint: "/axythicfin/quotation" },
-        { label: "Invoice", endpoint: "/axythicfin/invoice" },
-        { label: "Orders", endpoint: "/axythicfin/orders" },
-        { label: "Transactions", endpoint: "/axythicfin/transactions" },
-        { label: "Profile", endpoint: "/axythicfin/profile" },
-        { label: "Login", endpoint: "/axythicfin/login" },
-        { label: "Logout", endpoint: "/axythicfin/logout" },
+        { label: "Quotation", endpoint: "/axythicfin/dashboard" },
+        { label: "Invoice", endpoint: "/axythicfin/dashboard" },
+        { label: "Orders", endpoint: "/axythicfin/dashboard" },
+        { label: "Transactions", endpoint: "/axythicfin/dashboard" },
+        { label: "Profile", endpoint: "/axythicfin/dashboard" },
+        { label: "Login", endpoint: "/axythicfin/dashboard" },
+        { label: "Logout", endpoint: "/axythicfin/dashboard" },
       ],
     },
     {
@@ -126,7 +126,7 @@ export default function Portfolio() {
                 Our Work
               </span>
             </motion.div>
-            <motion.h3
+            <motion.h2
               className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ export default function Portfolio() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
                 Projects
               </span>
-            </motion.h3>
+            </motion.h2>
           </div>
         </div>
 
@@ -162,6 +162,7 @@ export default function Portfolio() {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className="w-full h-full object-cover transform group-hover:scale-110 group-hover:rotate-1 transition-transform duration-700"
                   />
                   <div

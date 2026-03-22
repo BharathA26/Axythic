@@ -22,16 +22,25 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <motion.div
-              className="flex items-center gap-2"
+            <motion.a
+              href="#"
+              className="flex items-center gap-2.5 select-none"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+              <img
+                src="/axythic-logo.svg"
+                alt="Axythic logo mark"
+                width={34}
+                height={38}
+                className="drop-shadow-sm"
+                draggable={false}
+              />
+              <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
                 Axythic
               </span>
-            </motion.div>
+            </motion.a>
 
             {/* Desktop Nav Links */}
             <div className="hidden md:flex items-center space-x-8">

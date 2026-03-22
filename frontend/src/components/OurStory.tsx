@@ -57,12 +57,12 @@ export default function OurStory() {
               </span>
             </div>
 
-            <h3 className="text-4xl md:text-6xl font-extrabold text-theme-primary mb-8 leading-[1.1] tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-extrabold text-theme-primary mb-8 leading-[1.1] tracking-tight">
               Crafting Digital{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
                 Excellence.
               </span>
-            </h3>
+            </h2>
 
             <motion.p
               className="text-xl text-theme-muted mb-6 leading-relaxed font-light"

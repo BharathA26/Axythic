@@ -11,8 +11,15 @@ export default function Footer({
     <footer className="bg-[#09090b] text-gray-400 pt-20 pb-12 relative overflow-hidden border-t border-gray-900">
       <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-12 mb-16">
         <div className="flex flex-col gap-6 max-w-sm">
-          <div className="flex items-center gap-2 text-white">
-            <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+          <div className="flex items-center gap-2.5 text-white">
+            <img
+              src="/axythic-logo.svg"
+              alt="Axythic logo mark"
+              width={28}
+              height={32}
+              draggable={false}
+            />
+            <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
               Axythic
             </span>
           </div>
@@ -56,17 +63,17 @@ export default function Footer({
             <h4 className="text-white font-semibold mb-4">Services</h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="#" className="hover:text-blue-400 transition-colors">
+                <a href="#portfolio" className="hover:text-blue-400 transition-colors">
                   Web Development
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-400 transition-colors">
+                <a href="#portfolio" className="hover:text-blue-400 transition-colors">
                   Mobile Apps
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-400 transition-colors">
+                <a href="#contact-us" className="hover:text-blue-400 transition-colors">
                   Custom Software
                 </a>
               </li>
@@ -81,13 +88,13 @@ export default function Footer({
         <div className="flex gap-6">
           <button
             onClick={onShowPrivacyPolicy}
-            className="hover:text-gray-300 transition-colors cursor-pointer"
+            className="hover:text-gray-300 transition-colors cursor-pointer underline-offset-2 hover:underline"
           >
             Privacy Policy
           </button>
           <button
             onClick={onShowTerms}
-            className="hover:text-gray-300 transition-colors cursor-pointer"
+            className="hover:text-gray-300 transition-colors cursor-pointer underline-offset-2 hover:underline"
           >
             Terms of Service
           </button>

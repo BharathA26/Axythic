@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -20,6 +20,16 @@ export default function ContactUs() {
     "idle" | "submitting" | "success" | "error"
   >("idle");
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const dismissTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Clean up any pending dismiss timer when the component unmounts
+  useEffect(() => {
+    return () => {
+      if (dismissTimerRef.current) {
+        clearTimeout(dismissTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -58,7 +68,8 @@ export default function ContactUs() {
       setSnackbarMessage("A network error occurred. Please try again later.");
     }
 
-    setTimeout(() => {
+    if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
+    dismissTimerRef.current = setTimeout(() => {
       setStatus("idle");
       setSnackbarMessage("");
     }, 3000);
@@ -86,7 +97,7 @@ export default function ContactUs() {
               Get In Touch
             </span>
           </motion.div>
-          <motion.h3
+          <motion.h2
             className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight mb-4"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -97,7 +108,7 @@ export default function ContactUs() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
               Great
             </span>
-          </motion.h3>
+          </motion.h2>
           <motion.p
             className="text-xl text-theme-muted max-w-2xl mx-auto font-light"
             initial={{ opacity: 0, y: 10 }}

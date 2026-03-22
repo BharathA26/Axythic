@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Grid,
@@ -8,12 +9,15 @@ import {
   Settings,
   HelpCircle,
   LogOut,
+  X,
 } from "lucide-react";
 import type { View } from "./index";
 
 interface SidebarProps {
   activeView: View;
   onNavigate: (view: View) => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 type NavItem = {
@@ -72,9 +76,15 @@ function NavButton({
   );
 }
 
-export default function Sidebar({ activeView, onNavigate }: SidebarProps) {
+function SidebarContent({
+  activeView,
+  onNavigate,
+}: {
+  activeView: View;
+  onNavigate: (view: View) => void;
+}) {
   return (
-    <aside className="w-64 bg-white border-r border-gray-100 flex flex-col h-full overflow-y-auto overflow-x-hidden custom-scrollbar">
+    <>
       {/* Logo */}
       <div className="p-6 flex items-center gap-3">
         <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl">
@@ -100,7 +110,7 @@ export default function Sidebar({ activeView, onNavigate }: SidebarProps) {
       </div>
 
       {/* Nav */}
-      <div className="flex-1 px-4 space-y-8 pb-6">
+      <div className="flex-1 px-4 space-y-8 pb-6 overflow-y-auto custom-scrollbar">
         {/* MAIN MENU */}
         <div>
           <h3 className="px-2 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
@@ -157,6 +167,58 @@ export default function Sidebar({ activeView, onNavigate }: SidebarProps) {
           </nav>
         </div>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export default function Sidebar({
+  activeView,
+  onNavigate,
+  isOpen = false,
+  onClose,
+}: SidebarProps) {
+  return (
+    <>
+      {/* ── Desktop sidebar (always visible on md+) ── */}
+      <aside className="hidden md:flex w-64 bg-white border-r border-gray-100 flex-col h-full overflow-y-auto overflow-x-hidden custom-scrollbar">
+        <SidebarContent activeView={activeView} onNavigate={onNavigate} />
+      </aside>
+
+      {/* ── Mobile drawer (slide-in, visible on < md) ── */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/40 z-40 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={onClose}
+            />
+
+            {/* Drawer panel */}
+            <motion.aside
+              className="fixed top-0 left-0 h-full w-72 bg-white border-r border-gray-100 flex flex-col z-50 md:hidden"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+              {/* Close button */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors z-10"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <SidebarContent activeView={activeView} onNavigate={onNavigate} />
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

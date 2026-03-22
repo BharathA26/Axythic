@@ -51,7 +51,7 @@ export default function FAQ() {
               FAQ
             </span>
           </motion.div>
-          <motion.h3
+          <motion.h2
             className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export default function FAQ() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
               Questions
             </span>
-          </motion.h3>
+          </motion.h2>
         </div>
 
         <div className="space-y-4">
@@ -80,12 +80,13 @@ export default function FAQ() {
               }`}
             >
               <button
-                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none"
+                className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset"
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                aria-expanded={openIndex === idx}
               >
                 <span
                   className={`font-semibold text-lg transition-colors ${
-                    openIndex === idx ? "text-theme-primary" : "text-gray-300"
+                    openIndex === idx ? "text-theme-primary" : "text-theme-muted"
                   }`}
                 >
                   {faq.question}

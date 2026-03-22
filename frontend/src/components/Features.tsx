@@ -47,12 +47,12 @@ export default function Features() {
               Powerful Integrations
             </span>
           </div>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-theme-primary tracking-tight leading-tight">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-theme-primary tracking-tight leading-tight">
             Connect everything. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">
               Build anything.
             </span>
-          </h3>
+          </h2>
           <p className="mt-6 text-lg text-theme-muted max-w-2xl mx-auto font-light">
             Bring your favorite tools together in one beautiful, collaborative
             workspace. Monitor deployments, assign issues, and debug together in

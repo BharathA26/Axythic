@@ -24,7 +24,7 @@ export default function VisionMission() {
               Purpose Driven
             </span>
           </motion.div>
-          <motion.h3
+          <motion.h2
             className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -35,7 +35,7 @@ export default function VisionMission() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
               Mission
             </span>
-          </motion.h3>
+          </motion.h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

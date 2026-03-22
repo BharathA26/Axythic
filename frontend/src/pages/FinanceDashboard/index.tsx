@@ -33,12 +33,27 @@ const breadcrumbLabels: Record<View, string> = {
 
 export default function FinanceDashboard() {
   const [view, setView] = useState<View>("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleNavigate = (v: View) => {
+    setView(v);
+    setSidebarOpen(false);
+  };
 
   return (
     <div className="flex h-screen bg-[#F3F4F6] overflow-hidden font-sans">
-      <Sidebar activeView={view} onNavigate={setView} />
+      <Sidebar
+        activeView={view}
+        onNavigate={handleNavigate}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
       <div className="flex-1 flex flex-col h-full overflow-hidden">
-        <Header breadcrumb={breadcrumbLabels[view]} onNavigate={setView} />
+        <Header
+          breadcrumb={breadcrumbLabels[view]}
+          onNavigate={setView}
+          onMenuClick={() => setSidebarOpen(true)}
+        />
         <main className="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar">
           {view === "analytics" && <Analytics />}
           {view === "transactions" && <Transactions />}
