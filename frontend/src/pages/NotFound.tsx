@@ -170,39 +170,6 @@ export default function NotFound() {
             </Link>
           </motion.div>
 
-          {/* Helpful links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm"
-            style={{ color: "var(--text-faint)" }}
-          >
-            <span>Quick links:</span>
-            {[
-              { label: "About", to: "/about" },
-              { label: "Portfolio", to: "/portfolio" },
-              { label: "Services", to: "/#services" },
-              { label: "FAQ", to: "/#faq" },
-            ].map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="underline underline-offset-4 decoration-transparent transition-colors duration-150 hover:decoration-current"
-                style={{ color: "var(--text-muted)" }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "rgb(99, 102, 241)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "var(--text-muted)";
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </motion.div>
         </div>
       </section>
     </PublicPageLayout>
