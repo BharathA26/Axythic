@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
   MapPin,
+  Phone,
+  MessageCircle,
+  Instagram,
   Send,
   CheckCircle2,
   XCircle,
@@ -11,7 +14,7 @@ import {
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ??
-  "https://axythicbackend-l9akehl08-bharatha26s-projects.vercel.app";
+  "https://axythicbackend.vercel.app";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -144,6 +147,61 @@ export default function ContactUs() {
                     Email Us
                   </h4>
                   <p className="text-theme-muted mt-1">info@axythic.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 p-3 rounded-2xl">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-theme-primary">
+                    Call Us
+                  </h4>
+                  <a
+                    href="tel:+919488943920"
+                    className="inline-block text-theme-muted mt-1 hover:text-theme-primary transition-colors"
+                  >
+                    +91 94889 43920
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="bg-green-500/20 border border-green-500/30 text-green-400 p-3 rounded-2xl">
+                  <MessageCircle className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-theme-primary">
+                    WhatsApp
+                  </h4>
+                  <a
+                    href="https://wa.me/919488943920"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block text-theme-muted mt-1 hover:text-theme-primary transition-colors"
+                  >
+                    Chat with us
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="bg-pink-500/20 border border-pink-500/30 text-pink-400 p-3 rounded-2xl">
+                  <Instagram className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-theme-primary">
+                    Instagram
+                  </h4>
+                  <a
+                    href="https://www.instagram.com/axythic_dev/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block text-theme-muted mt-1 hover:text-theme-primary transition-colors"
+                  >
+                    @axythic_dev
+                  </a>
                 </div>
               </div>
 
