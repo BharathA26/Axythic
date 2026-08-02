@@ -82,14 +82,12 @@ export default function Hero() {
         >
           <MagneticButton
             href="#contact-us"
-            as="a"
             className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-500 hover:to-indigo-500 hover:shadow-lg hover:shadow-blue-600/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
           >
             Start Your Project <ArrowRight className="w-5 h-5" />
           </MagneticButton>
           <MagneticButton
             href="#portfolio"
-            as="a"
             className="px-8 py-4 rounded-full font-semibold text-lg border transition-all text-center hover:-translate-y-0.5 transform duration-200"
             style={{
               backgroundColor: "var(--bg-card)",

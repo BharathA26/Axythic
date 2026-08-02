@@ -3,7 +3,13 @@ import { hrmStats, upcomingInterviews, recentHirings } from "./hrmData";
 import { TrendingUp, MoreVertical, Clock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const StatCard = ({ stat, index }: { stat: any; index: number }) => {
+const StatCard = ({
+  stat,
+  index,
+}: {
+  stat: (typeof hrmStats)[number];
+  index: number;
+}) => {
   const isPositive = stat.trend.includes("+");
 
   return (

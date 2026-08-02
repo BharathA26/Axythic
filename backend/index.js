@@ -1,11 +1,37 @@
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 const app = express();
+app.disable("x-powered-by");
+
+app.use((req, res, next) => {
+  res.set({
+    "Content-Security-Policy":
+      "default-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
+    "Permissions-Policy":
+      "camera=(), geolocation=(), microphone=(), payment=(), usb=()",
+    "Referrer-Policy": "no-referrer",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-Robots-Tag": "noindex, nofollow, noarchive",
+  });
+  next();
+});
+
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "16kb" }));
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function cleanString(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function hasValidLength(value, maximum) {
+  return value.length > 0 && value.length <= maximum;
+}
 
 // Basic health check route
 app.get("/api/health", (req, res) => {
@@ -17,14 +43,13 @@ app.get("/api/health", (req, res) => {
 
 // Mock waitlist route
 app.post("/api/waitlist", (req, res) => {
-  const { email } = req.body;
-  if (!email) {
+  const email = cleanString(req.body?.email);
+  if (!hasValidLength(email, 254) || !EMAIL_PATTERN.test(email)) {
     return res
       .status(400)
-      .json({ status: "error", message: "Email is required" });
+      .json({ status: "error", message: "A valid email is required" });
   }
   // In a real app, save to MongoDB waitlist collection here
-  console.log(`New waitlist signup: ${email}`);
   res.json({ status: "success", message: "Successfully joined the waitlist!" });
 });
 
@@ -35,41 +60,51 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.EMAIL_USER || "your-email@gmail.com",
-    pass: process.env.EMAIL_PASS || "your-app-password",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
 // Contact form route
 app.post("/api/contact", async (req, res) => {
-  const { firstName, lastName, email, message } = req.body;
+  const firstName = cleanString(req.body?.firstName);
+  const lastName = cleanString(req.body?.lastName);
+  const email = cleanString(req.body?.email);
+  const message = cleanString(req.body?.message);
 
-  if (!firstName || !lastName || !email || !message) {
+  if (
+    !hasValidLength(firstName, 100) ||
+    !hasValidLength(lastName, 100) ||
+    !hasValidLength(email, 254) ||
+    !EMAIL_PATTERN.test(email) ||
+    !hasValidLength(message, 5000)
+  ) {
     return res
       .status(400)
-      .json({ status: "error", message: "All fields are required" });
+      .json({ status: "error", message: "Valid form fields are required" });
+  }
+
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    return res.status(503).json({
+      status: "error",
+      message: "Contact email is temporarily unavailable.",
+    });
   }
 
   try {
     const mailOptions = {
-      from: process.env.EMAIL_USER || "your-email@gmail.com",
+      from: process.env.EMAIL_USER,
       to: process.env.CONTACT_EMAIL_DESTINATION || "info@axythic.com", // where you want to receive the messages
-      subject: `New Contact Form Submission from ${firstName} ${lastName}`,
-      html: `
-        <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
-      `,
+      replyTo: email,
+      subject: "New Axythic contact form submission",
+      text: `Name: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`,
+      disableFileAccess: true,
+      disableUrlAccess: true,
     };
     await transporter.sendMail(mailOptions);
-    console.log(`Contact form email sent from ${email}`);
     res.json({ status: "success", message: "Message sent successfully!" });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    // If nodemailer fails (e.g., bad credentials), log it but we can simulate success for testing
-    // Or return 500. We'll return 500 for proper error handling.
+  } catch {
+    console.error("Contact form email delivery failed.");
     res.status(500).json({
       status: "error",
       message: "Failed to send message. Please try again later.",
@@ -77,13 +112,44 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
+app.use((req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Route not found",
+  });
+});
+
+// Keep parser and unexpected errors from exposing implementation details.
+app.use((error, req, res, next) => {
+  if (res.headersSent) return next(error);
+
+  const status =
+    Number.isInteger(error?.status) && error.status >= 400
+      ? error.status
+      : 500;
+
+  if (status >= 500) {
+    console.error("Unhandled backend request error.");
+  }
+
+  return res.status(status).json({
+    status: "error",
+    message:
+      status === 413
+        ? "Request body is too large"
+        : status === 400
+          ? "Invalid JSON request body"
+          : "Internal server error",
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 // Export the app for serverless platforms like Vercel.
 module.exports = app;
 
-// Start a local server only when not running on Vercel.
-if (process.env.VERCEL !== "1") {
+// Start a local server only when this file is the process entry point.
+if (require.main === module && process.env.VERCEL !== "1") {
   app.listen(PORT, () => {
     console.log(`Backend server started on port ${PORT}`);
   });

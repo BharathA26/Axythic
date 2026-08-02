@@ -112,7 +112,6 @@ export default function Shopcart() {
 
       {view === "products" && (
         <Products
-          onNavigate={navigateTo}
           onViewProduct={viewProduct}
           onAddToCart={addToCart}
           wishlist={wishlist}
@@ -124,7 +123,6 @@ export default function Shopcart() {
       {/* Deals — products page filtered to deals */}
       {view === "deals" && (
         <Products
-          onNavigate={navigateTo}
           onViewProduct={viewProduct}
           onAddToCart={addToCart}
           wishlist={wishlist}
@@ -137,7 +135,6 @@ export default function Shopcart() {
       {/* What's New — products page filtered to new arrivals */}
       {view === "whats-new" && (
         <Products
-          onNavigate={navigateTo}
           onViewProduct={viewProduct}
           onAddToCart={addToCart}
           wishlist={wishlist}

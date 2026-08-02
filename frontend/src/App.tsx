@@ -4,8 +4,13 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import DemoNotice from "./components/DemoNotice";
+import RouteMetadata, {
+  isDemoRoute,
+} from "./components/RouteMetadata";
 
 // Lazy-load all demo/sub-application pages to keep the initial bundle small
 const FinanceDashboard = lazy(() => import("./pages/FinanceDashboard"));
@@ -36,8 +41,9 @@ const Settings = lazy(() => import("./pages/HRMPlatform/Settings"));
 // Legal pages
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
-import { ReactLenis } from "@studio-freight/react-lenis";
+import { ReactLenis } from "lenis/react";
 import { ThemeProvider } from "./context/ThemeContext";
 
 const PageLoader = () => (
@@ -46,11 +52,23 @@ const PageLoader = () => (
   </div>
 );
 
+function RouteChrome() {
+  const { pathname } = useLocation();
+
+  return (
+    <>
+      <RouteMetadata />
+      {isDemoRoute(pathname) && <DemoNotice />}
+    </>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider>
       <ReactLenis root>
         <Router>
+          <RouteChrome />
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -103,6 +121,8 @@ function App() {
                 <Route path="events" element={<Events />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
+
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </Router>

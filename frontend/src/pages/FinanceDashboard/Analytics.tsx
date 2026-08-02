@@ -169,12 +169,13 @@ function DonutChart() {
   const r = 58;
   const stroke = 24;
 
-  let cumulativePct = 0;
-
-  const segments = categories.map((cat) => {
-    const startAngle = cumulativePct * 3.6 - 90; // degrees
-    cumulativePct += cat.pct;
-    const endAngle = cumulativePct * 3.6 - 90;
+  const segments = categories.map((cat, index) => {
+    const startPct = categories
+      .slice(0, index)
+      .reduce((total, category) => total + category.pct, 0);
+    const endPct = startPct + cat.pct;
+    const startAngle = startPct * 3.6 - 90; // degrees
+    const endAngle = endPct * 3.6 - 90;
 
     const toRad = (deg: number) => (deg * Math.PI) / 180;
     const x1 = cx + r * Math.cos(toRad(startAngle));

@@ -14,6 +14,7 @@ import {
   CheckSquare,
   BarChart,
 } from "lucide-react";
+import type { ReactNode } from "react";
 
 export default function Sidebar() {
   const location = useLocation();
@@ -272,6 +273,15 @@ export default function Sidebar() {
   );
 }
 
+type NavItemProps = {
+  icon: ReactNode;
+  label: string;
+  to: string;
+  active?: boolean;
+  badge?: string | number;
+  isSub?: boolean;
+};
+
 function NavItem({
   icon,
   label,
@@ -279,7 +289,7 @@ function NavItem({
   active = false,
   badge,
   isSub = false,
-}: any) {
+}: NavItemProps) {
   return (
     <Link
       to={to}
