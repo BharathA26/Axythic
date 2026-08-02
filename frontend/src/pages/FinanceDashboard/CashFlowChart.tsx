@@ -8,6 +8,33 @@ import {
   Cell,
 } from "recharts";
 
+type CashFlowTooltipProps = {
+  active?: boolean;
+  payload?: Array<{ value?: number }>;
+};
+
+function CustomTooltip({ active, payload }: CashFlowTooltipProps) {
+  if (active && payload?.length) {
+    const value = Number(payload[0]?.value ?? 0);
+
+    return (
+      <div className="bg-gray-900 text-white p-3 rounded-xl shadow-lg shadow-gray-900/20 text-xs">
+        <p className="font-bold text-sm mb-2 opacity-90">July 23, 2026</p>
+        <div className="flex justify-between gap-6 mb-1">
+          <span className="opacity-70">Cashflow</span>
+          <span className="font-medium">{`$${value.toLocaleString()}`}</span>
+        </div>
+        <div className="flex justify-between gap-6">
+          <span className="opacity-70">Inflow</span>
+          <span className="font-medium">-$7,456.00</span>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 export default function CashFlowChart() {
   const data = [
     { name: "Jan", value: 24000 },
@@ -18,25 +45,6 @@ export default function CashFlowChart() {
     { name: "Jun", value: 20000 },
     { name: "Jul", value: 29000 },
   ];
-
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-gray-900 text-white p-3 rounded-xl shadow-lg shadow-gray-900/20 text-xs">
-          <p className="font-bold text-sm mb-2 opacity-90">{`July 23, 2026`}</p>
-          <div className="flex justify-between gap-6 mb-1">
-            <span className="opacity-70">Cashflow</span>
-            <span className="font-medium">{`$${payload[0].value.toLocaleString()}`}</span>
-          </div>
-          <div className="flex justify-between gap-6">
-            <span className="opacity-70">Inflow</span>
-            <span className="font-medium">-$7,456.00</span>
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
 
   return (
     <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm h-full flex flex-col">

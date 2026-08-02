@@ -6,8 +6,7 @@ interface MagneticButtonProps {
   className?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
-  as?: React.ElementType;
-  href?: string;
+  href: string;
 }
 
 export default function MagneticButton({
@@ -15,10 +14,9 @@ export default function MagneticButton({
   className = "",
   style,
   onClick,
-  as: Component = "button",
   href,
 }: MagneticButtonProps) {
-  const ref = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const ref = useRef<HTMLAnchorElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const controls = useAnimation();
 
@@ -44,10 +42,8 @@ export default function MagneticButton({
     });
   }, [position, controls]);
 
-  const MotionComponent = motion(Component as any);
-
   return (
-    <MotionComponent
+    <motion.a
       ref={ref}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
@@ -55,9 +51,9 @@ export default function MagneticButton({
       className={`${className}`}
       style={style}
       onClick={onClick}
-      {...(href ? { href } : {})}
+      href={href}
     >
       {children}
-    </MotionComponent>
+    </motion.a>
   );
 }

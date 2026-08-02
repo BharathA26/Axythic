@@ -61,6 +61,10 @@ export default function AccountSettings() {
             <h2 className="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">
               Account Security
             </h2>
+            <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              Demo only: password changes are disabled and no credentials are
+              accepted or transmitted.
+            </p>
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -68,8 +72,9 @@ export default function AccountSettings() {
                 </label>
                 <input
                   type="password"
-                  placeholder="••••••••"
-                  className="w-full max-w-sm px-4 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5E2ADA]/20"
+                  placeholder="Disabled in demo"
+                  disabled
+                  className="w-full max-w-sm cursor-not-allowed px-4 py-2 border border-gray-200 rounded-lg bg-gray-100 text-gray-500"
                 />
               </div>
               <div>
@@ -78,8 +83,9 @@ export default function AccountSettings() {
                 </label>
                 <input
                   type="password"
-                  placeholder="••••••••"
-                  className="w-full max-w-sm px-4 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5E2ADA]/20"
+                  placeholder="Disabled in demo"
+                  disabled
+                  className="w-full max-w-sm cursor-not-allowed px-4 py-2 border border-gray-200 rounded-lg bg-gray-100 text-gray-500"
                 />
               </div>
               <div>
@@ -88,11 +94,15 @@ export default function AccountSettings() {
                 </label>
                 <input
                   type="password"
-                  placeholder="••••••••"
-                  className="w-full max-w-sm px-4 py-2 border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5E2ADA]/20"
+                  placeholder="Disabled in demo"
+                  disabled
+                  className="w-full max-w-sm cursor-not-allowed px-4 py-2 border border-gray-200 rounded-lg bg-gray-100 text-gray-500"
                 />
               </div>
-              <button className="px-5 py-2 mt-4 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+              <button
+                disabled
+                className="cursor-not-allowed px-5 py-2 mt-4 bg-gray-300 text-gray-600 text-sm font-semibold rounded-lg"
+              >
                 Update Password
               </button>
             </div>

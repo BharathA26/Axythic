@@ -28,7 +28,9 @@ function Field({
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-[#1a3c34] focus:border-transparent transition-all"
+        disabled
+        aria-describedby="shopcart-demo-form-note"
+        className="w-full cursor-not-allowed bg-gray-100 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-500 outline-none"
       />
     </div>
   );
@@ -59,6 +61,13 @@ export default function Checkout({
           <ArrowLeft className="w-4 h-4" /> Back to Cart
         </button>
         <h1 className="text-2xl font-extrabold text-gray-900 mb-6">Checkout</h1>
+        <p
+          id="shopcart-demo-form-note"
+          className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900"
+        >
+          Portfolio demo only: checkout fields are disabled and no personal or
+          payment information is accepted, stored, or transmitted.
+        </p>
 
         {/* Progress */}
         <div className="flex items-center gap-2 mb-8 text-sm font-medium">
@@ -209,9 +218,9 @@ export default function Checkout({
               )}
               {payMethod !== "card" && (
                 <div className="text-center py-6 text-gray-400 text-sm">
-                  You will be redirected to{" "}
-                  {payMethod === "standard" ? "PayPal" : "Google Pay"} to
-                  complete payment.
+                  A real storefront could continue with{" "}
+                  {payMethod === "standard" ? "PayPal" : "Google Pay"}. This
+                  portfolio demo does not redirect or process payment.
                 </div>
               )}
             </div>
@@ -280,7 +289,7 @@ export default function Checkout({
                 onClick={onPlaceOrder}
                 className="mt-5 w-full bg-[#1a3c34] hover:bg-[#16342e] text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg shadow-green-900/20"
               >
-                Place Order →
+                Complete Demo Order →
               </button>
             </div>
           </div>

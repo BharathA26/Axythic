@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Heart, Star, ShoppingCart, Tag, Sparkles } from "lucide-react";
 import { products, categories } from "./data";
 import type { Product } from "./data";
-import type { View } from "./types";
 
 interface ProductsProps {
-  onNavigate: (view: View) => void;
   onViewProduct: (p: Product) => void;
   onAddToCart: (p: Product) => void;
   wishlist: number[];
@@ -30,7 +28,6 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export default function Products({
-  onNavigate: _onNavigate,
   onViewProduct,
   onAddToCart,
   wishlist,

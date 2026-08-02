@@ -36,7 +36,13 @@ function Field({
       <input
         type={type}
         defaultValue={defaultValue}
-        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+        disabled={type === "password"}
+        placeholder={type === "password" ? "Disabled in demo" : undefined}
+        className={`w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm outline-none transition-all ${
+          type === "password"
+            ? "cursor-not-allowed bg-gray-100 text-gray-500"
+            : "bg-gray-50 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:bg-white"
+        }`}
       />
     </div>
   );
@@ -172,6 +178,10 @@ export default function Settings() {
           {activeTab === "security" && (
             <div className="space-y-5">
               <h3 className="font-bold text-gray-900">Change Password</h3>
+              <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                Demo only: password fields are disabled and no credentials are
+                accepted or transmitted.
+              </p>
               <div className="space-y-4">
                 <Field
                   label="Current Password"
