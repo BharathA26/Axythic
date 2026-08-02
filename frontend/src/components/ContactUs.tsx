@@ -9,6 +9,10 @@ import {
   Sparkles,
 } from "lucide-react";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ??
+  "https://axythicbackend-l9akehl08-bharatha26s-projects.vercel.app";
+
 export default function ContactUs() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -42,7 +46,7 @@ export default function ContactUs() {
     setStatus("submitting");
 
     try {
-      const response = await fetch("https://axythicbackend.vercel.app/api/contact", {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
