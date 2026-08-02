@@ -57,6 +57,31 @@
   }
 }
 
+@layer components {
+  .legal-document.bg-white {
+    background-color: var(--bg-page) !important;
+  }
+
+  .legal-document .bg-white\/50 {
+    background-color: var(--bg-card) !important;
+  }
+
+  .legal-document .border-gray-100 {
+    border-color: var(--border-color) !important;
+  }
+
+  .legal-document .text-gray-900,
+  .legal-document .text-gray-800 {
+    color: var(--text-primary) !important;
+  }
+
+  .legal-document .text-gray-700,
+  .legal-document .text-gray-600,
+  .legal-document .text-gray-500 {
+    color: var(--text-muted) !important;
+  }
+}
+
 /* Custom utility for the glowing text or box shadows */
 @layer utilities {
   .glow-brand {

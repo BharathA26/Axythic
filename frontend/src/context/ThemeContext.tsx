@@ -8,14 +8,14 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: "dark",
+  theme: "light",
   toggleTheme: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem("axythic-theme") as Theme | null;
-    return saved ?? "dark";
+    const saved = localStorage.getItem("axythic-theme");
+    return saved === "dark" ? "dark" : "light";
   });
 
   useEffect(() => {

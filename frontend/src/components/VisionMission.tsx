@@ -21,7 +21,7 @@ export default function VisionMission() {
           >
             <Sparkles className="w-4 h-4 text-indigo-400" />
             <span className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
-              Purpose Driven
+            Purpose & Approach
             </span>
           </motion.div>
           <motion.h2
@@ -31,9 +31,9 @@ export default function VisionMission() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Vision &{" "}
+            Why we build &{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              Mission
+              how we work
             </span>
           </motion.h2>
         </div>
@@ -59,9 +59,8 @@ export default function VisionMission() {
               </div>
               <h4 className="text-3xl font-bold text-theme-primary mb-4">Our Vision</h4>
               <p className="text-lg text-theme-muted leading-relaxed max-w-sm font-light">
-                To be the leading global catalyst for digital transformation,
-                empowering businesses to thrive in a technology-first world
-                through flawless and intuitive software.
+                To make useful software easier to understand, operate, and
+                maintain for the people who depend on it.
               </p>
             </div>
           </motion.div>
@@ -88,9 +87,9 @@ export default function VisionMission() {
                 Our Mission
               </h4>
               <p className="text-lg text-theme-muted leading-relaxed max-w-sm font-light">
-                To engineer scalable, secure, and user-centric web and mobile
-                applications that solve real-world problems while delivering an
-                aesthetic and frictionless user experience.
+                To translate defined requirements into clear interfaces and
+                dependable software through focused design, implementation, and
+                validation.
               </p>
             </div>
           </motion.div>

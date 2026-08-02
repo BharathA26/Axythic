@@ -13,10 +13,10 @@ export default function DemoNotice() {
         information.
       </p>
       <Link
-        to="/"
+        to="/portfolio"
         className="mt-2 inline-flex shrink-0 font-semibold text-sky-300 underline decoration-sky-300/50 underline-offset-4 hover:text-sky-200 sm:mt-0"
       >
-        Return to Axythic
+        Return to Portfolio
       </Link>
     </aside>
   );

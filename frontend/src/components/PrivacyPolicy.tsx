@@ -1,13 +1,10 @@
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-interface PrivacyPolicyProps {
-  onBack: () => void;
-}
-
-export default function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
+export default function PrivacyPolicy() {
   return (
-    <div className="pt-32 pb-20 px-4 relative overflow-hidden flex flex-col items-center min-h-[90vh] bg-white">
+    <div className="legal-document pt-32 pb-20 px-4 relative overflow-hidden flex flex-col items-center min-h-[90vh] bg-white">
       {/* Background Gradient Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-gradient-to-b from-blue-500/10 via-indigo-500/5 to-transparent blur-[100px] -z-10 rounded-full" />
       <div className="absolute bottom-0 right-[-20%] w-[600px] h-[600px] bg-gradient-to-tr from-purple-500/10 to-indigo-500/10 blur-[120px] rounded-full -z-10" />
@@ -18,16 +15,16 @@ export default function PrivacyPolicy({ onBack }: PrivacyPolicyProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <button
-          onClick={onBack}
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors"
+        <Link
+          to="/"
+          className="mb-8 inline-flex items-center gap-2 rounded-sm text-sm font-medium text-gray-500 hover:text-blue-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home
-        </button>
+        </Link>
 
         <div className="mb-12 border-b border-gray-100 pb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-semibold mb-4">
             Legal Information
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-4">

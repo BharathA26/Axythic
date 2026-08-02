@@ -46,7 +46,7 @@ export default function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
           </span>
-          Next-Gen Software Development
+          Custom Software · Web · Mobile
         </motion.div>
 
         <motion.h1
@@ -56,10 +56,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Bring Your Ideas to
+          Software built around{" "}
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-            Digital Reality.
+            how your business works.
           </span>
         </motion.h1>
 
@@ -70,8 +70,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          We build custom software, web applications, and mobile apps tailored
-          to accelerate your business growth and dominate the digital landscape.
+          Axythic plans and builds focused digital products for defined users,
+          workflows, and business requirements.
         </motion.p>
 
         <motion.div
@@ -81,13 +81,13 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <MagneticButton
-            href="#contact-us"
+            href="/contact"
             className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-500 hover:to-indigo-500 hover:shadow-lg hover:shadow-blue-600/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
           >
-            Start Your Project <ArrowRight className="w-5 h-5" />
+            Discuss Your Project <ArrowRight className="w-5 h-5" />
           </MagneticButton>
           <MagneticButton
-            href="#portfolio"
+            href="/portfolio"
             className="px-8 py-4 rounded-full font-semibold text-lg border transition-all text-center hover:-translate-y-0.5 transform duration-200"
             style={{
               backgroundColor: "var(--bg-card)",
@@ -95,7 +95,7 @@ export default function Hero() {
               color: "var(--text-primary)",
             }}
           >
-            View Our Work
+            Explore Our Work
           </MagneticButton>
         </motion.div>
       </div>

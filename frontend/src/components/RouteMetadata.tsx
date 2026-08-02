@@ -8,13 +8,14 @@ type PageMetadata = {
   title: string;
   description: string;
   indexable: boolean;
+  breadcrumbLabel?: string;
 };
 
 const PUBLIC_PAGE_METADATA: Record<string, PageMetadata> = {
   "/": {
-    title: "Axythic | Custom Software & Web App Development Agency — India",
+    title: "Axythic | Custom Software, Web & Mobile Development",
     description:
-      "Axythic builds custom software, web applications, and mobile apps tailored to accelerate business growth. Based in Erode, Tamil Nadu, India.",
+      "Axythic plans and builds custom software, web applications, and mobile-focused digital products for defined users and business requirements.",
     indexable: true,
   },
   "/privacy-policy": {
@@ -22,12 +23,63 @@ const PUBLIC_PAGE_METADATA: Record<string, PageMetadata> = {
     description:
       "Read how Axythic describes the collection, use, and protection of information submitted through its website.",
     indexable: true,
+    breadcrumbLabel: "Privacy Policy",
   },
   "/terms": {
     title: "Terms and Conditions | Axythic",
     description:
       "Read the terms and conditions governing use of the Axythic website and its services.",
     indexable: true,
+    breadcrumbLabel: "Terms and Conditions",
+  },
+  "/services/custom-software-development": {
+    title: "Custom Software Development Services | Axythic",
+    description:
+      "Explore Axythic custom software development for focused applications, dashboards, workflows, React interfaces, and Express API services.",
+    indexable: true,
+    breadcrumbLabel: "Custom Software Development",
+  },
+  "/services/web-development": {
+    title: "Web Development Services | Axythic",
+    description:
+      "Explore Axythic web development for responsive public websites and browser applications using React, TypeScript, Vite, and practical SEO foundations.",
+    indexable: true,
+    breadcrumbLabel: "Web Development",
+  },
+  "/services/mobile-app-development": {
+    title: "Mobile App Development Services | Axythic",
+    description:
+      "Explore Axythic mobile app development planning, mobile-first interfaces, interactive prototypes, and scoped delivery decisions.",
+    indexable: true,
+    breadcrumbLabel: "Mobile App Development",
+  },
+  "/about": {
+    title: "About Axythic | Software Development Company in Erode",
+    description:
+      "Learn about Axythic, a software development company in Erode, Tamil Nadu, working on custom software, web applications, and mobile-focused experiences.",
+    indexable: true,
+    breadcrumbLabel: "About",
+  },
+  "/case-studies": {
+    title: "Portfolio Demonstrations and Case Studies | Axythic",
+    description:
+      "Explore Axythic's fictional, sample-data portfolio demonstrations for finance, education, e-commerce, HR, interactive web, and mobile interfaces.",
+    indexable: true,
+    breadcrumbLabel: "Case Studies",
+  },
+  "/portfolio": {
+    title: "Software and Interface Portfolio | Axythic",
+    description:
+      "Explore Axythic portfolio demonstrations for finance, education, e-commerce, HR, interactive web, and mobile-focused interfaces.",
+    indexable: true,
+    breadcrumbLabel: "Portfolio",
+  },
+  "/contact": {
+    title: "Contact Axythic | Discuss a Software Project",
+    description:
+      "Contact Axythic in Erode, Tamil Nadu, to discuss a custom software, web development, or mobile app development requirement.",
+    indexable: true,
+    breadcrumbLabel: "Contact",
   },
 };
 
@@ -61,7 +113,7 @@ const DEMO_PAGE_METADATA: Array<{
       "An interactive, fictional human-resources interface shown as an Axythic portfolio demonstration.",
   },
   {
-    prefix: "/portfolio",
+    prefix: "/demos/3d-landing-page",
     title: "3D Landing Page Portfolio Demo | Axythic",
     description:
       "An interactive landing-page concept shown as an Axythic portfolio demonstration.",
@@ -146,6 +198,46 @@ function setCanonical(href: string) {
   element.href = href;
 }
 
+function setBreadcrumbStructuredData(
+  metadata: PageMetadata,
+  canonicalUrl: string,
+) {
+  const existingElement = document.getElementById(
+    "route-breadcrumb-jsonld",
+  ) as HTMLScriptElement | null;
+
+  if (!metadata.indexable || !metadata.breadcrumbLabel) {
+    existingElement?.remove();
+    return;
+  }
+
+  const element = existingElement ?? document.createElement("script");
+  element.id = "route-breadcrumb-jsonld";
+  element.type = "application/ld+json";
+  element.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${SITE_URL}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: metadata.breadcrumbLabel,
+        item: canonicalUrl,
+      },
+    ],
+  });
+
+  if (!existingElement) {
+    document.head.appendChild(element);
+  }
+}
+
 export default function RouteMetadata() {
   const { pathname } = useLocation();
 
@@ -160,6 +252,7 @@ export default function RouteMetadata() {
 
     document.title = metadata.title;
     setCanonical(canonicalUrl);
+    setBreadcrumbStructuredData(metadata, canonicalUrl);
     setMeta("name", "description", metadata.description);
     setMeta("name", "robots", robots);
     setMeta("name", "googlebot", robots);

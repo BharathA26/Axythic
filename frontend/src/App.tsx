@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,6 +11,7 @@ import DemoNotice from "./components/DemoNotice";
 import RouteMetadata, {
   isDemoRoute,
 } from "./components/RouteMetadata";
+import { ReactLenis, useLenis } from "lenis/react";
 
 // Lazy-load all demo/sub-application pages to keep the initial bundle small
 const FinanceDashboard = lazy(() => import("./pages/FinanceDashboard"));
@@ -39,11 +40,23 @@ const Events = lazy(() => import("./pages/HRMPlatform/Events"));
 const Settings = lazy(() => import("./pages/HRMPlatform/Settings"));
 
 // Legal pages
+const CustomSoftwareDevelopmentPage = lazy(
+  () => import("./pages/services/CustomSoftwareDevelopmentPage"),
+);
+const WebDevelopmentPage = lazy(
+  () => import("./pages/services/WebDevelopmentPage"),
+);
+const MobileAppDevelopmentPage = lazy(
+  () => import("./pages/services/MobileAppDevelopmentPage"),
+);
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const CaseStudiesPage = lazy(() => import("./pages/CaseStudiesPage"));
+const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-import { ReactLenis } from "lenis/react";
 import { ThemeProvider } from "./context/ThemeContext";
 
 const PageLoader = () => (
@@ -53,7 +66,49 @@ const PageLoader = () => (
 );
 
 function RouteChrome() {
-  const { pathname } = useLocation();
+  const { pathname, hash, key } = useLocation();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!hash) {
+      // Keep the browser and Lenis in sync so a new route cannot inherit the
+      // previous page's scroll position.
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      lenis?.scrollTo(0, { immediate: true, force: true });
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(hash.slice(1));
+
+      if (!target) return;
+
+      const fixedHeaderOffset = 96;
+      const targetTop =
+        target.getBoundingClientRect().top +
+        window.scrollY -
+        fixedHeaderOffset;
+
+      const scrollTop = Math.max(targetTop, 0);
+
+      if (lenis) {
+        lenis.scrollTo(scrollTop, { force: true });
+      } else {
+        window.scrollTo({ top: scrollTop, left: 0, behavior: "smooth" });
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, hash, key, lenis]);
 
   return (
     <>
@@ -73,6 +128,24 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
 
+              {/* Public company and service pages */}
+              <Route
+                path="/services/custom-software-development"
+                element={<CustomSoftwareDevelopmentPage />}
+              />
+              <Route
+                path="/services/web-development"
+                element={<WebDevelopmentPage />}
+              />
+              <Route
+                path="/services/mobile-app-development"
+                element={<MobileAppDevelopmentPage />}
+              />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/case-studies" element={<CaseStudiesPage />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+
               {/* Legal */}
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
               <Route path="/terms" element={<TermsPage />} />
@@ -87,7 +160,10 @@ function App() {
               <Route path="/shopcart" element={<Shopcart />} />
 
               {/* Portfolio 3D */}
-              <Route path="/portfolio" element={<Portfolio3D />} />
+              <Route
+                path="/demos/3d-landing-page"
+                element={<Portfolio3D />}
+              />
 
               {/* Fitness App */}
               <Route path="/fitness-app" element={<FitnessApp />} />

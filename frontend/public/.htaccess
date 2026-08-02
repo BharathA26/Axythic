@@ -13,6 +13,9 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP_HOST} ^axythic\.com$ [NC]
   RewriteRule ^ https://axythic.com%{REQUEST_URI} [R=301,L,NE]
 
+  # Public page canonicals use no trailing slash except the site root.
+  RewriteRule ^(services/(?:custom-software-development|web-development|mobile-app-development)|about|case-studies|portfolio|contact|privacy-policy|terms)/$ /$1 [R=301,L,NE]
+
   # Serve real assets directly.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
@@ -20,18 +23,18 @@ ErrorDocument 404 /404.html
 
   # Only declared SPA routes receive the application shell.
   RewriteRule ^$ index.html [L]
-  RewriteRule ^(?:privacy-policy|terms|axythicfin/dashboard|shopcart|portfolio|fitness-app|eduquest(?:/(?:student(?:/(?:courses|inbox|tasks|team|settings|plan|help))?|courses|admin))?|hrm/(?:dashboard|personnel|profile|applications|talent|events|settings))/?$ index.html [L]
+  RewriteRule ^(?:services/(?:custom-software-development|web-development|mobile-app-development)|about|case-studies|portfolio|contact|privacy-policy|terms|axythicfin/dashboard|shopcart|demos/3d-landing-page|fitness-app|eduquest(?:/(?:student(?:/(?:courses|inbox|tasks|team|settings|plan|help))?|courses|admin))?|hrm/(?:dashboard|personnel|profile|applications|talent|events|settings))/?$ index.html [L]
 
   # Unknown paths must remain real HTTP 404 responses.
   RewriteRule ^ - [R=404,L]
 </IfModule>
 
 <IfModule mod_setenvif.c>
-  SetEnvIf Request_URI "^/(axythicfin|shopcart|portfolio|fitness-app|eduquest|hrm)(/|$)" AXYTHIC_NOINDEX
+  SetEnvIf Request_URI "^/(axythicfin|shopcart|demos|fitness-app|eduquest|hrm)(/|$)" AXYTHIC_NOINDEX
 </IfModule>
 
 <IfModule mod_headers.c>
-  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; connect-src 'self' https://axythicbackend.vercel.app; font-src 'self' data:; form-action 'self'; frame-ancestors 'none'; frame-src 'none'; img-src 'self' data: https://images.unsplash.com https://i.pravatar.cc https://ui-avatars.com https://placehold.co https://cdn.simpleicons.org; manifest-src 'self'; media-src 'self'; object-src 'none'; script-src 'self' 'sha256-/yyy1nSH2410x1J6ZjFex5gaiRgpYjGRL3mSm27g+3g='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; worker-src 'none'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; connect-src 'self' https://axythicbackend.vercel.app; font-src 'self' data:; form-action 'self'; frame-ancestors 'none'; frame-src 'none'; img-src 'self' data: https://images.unsplash.com https://i.pravatar.cc https://ui-avatars.com https://placehold.co https://cdn.simpleicons.org; manifest-src 'self'; media-src 'self'; object-src 'none'; script-src 'self' 'sha256-vZlfmSP1Xv49wtv0pJLgzlDFCl7Bmshl4n63Iem+1QE=' 'sha256-KxzxKFz4eoWY4uPoO8+ZdTwZsLjnRymslo89NTvirMk=' 'sha256-fNlxK+yEXsNd5cZDb17jLhN3NFTQmRu1JZqsfdNGTEM=' 'sha256-dD5VRNHG1CH953iUk6HpuePyo1yiAlPs1i7nBHmgrjo=' 'sha256-+b4Dc/dMfh2bqMabsmofFmaAQFw+6gGWvzgWgjgsJKg=' 'sha256-Zh9PnFF7Q3ldVIlk1HFze8RXyOBqzoGFGzGgQbHMNoQ=' 'sha256-bW3ss2c3+2ZFqcoc0r0H9zi3PwqjdFrnedm+BOxap9Y=' 'sha256-1NgPk/He4j0cY0O0EG+CqSO0rKNSV/ySvSWvTh/6Bl0=' 'sha256-ERSUPYtH/VTX7KLRWOujokne/BYKabkHCGEuw7+4nPg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; worker-src 'none'; upgrade-insecure-requests"
   Header always set Cross-Origin-Opener-Policy "same-origin"
   Header always set Cross-Origin-Resource-Policy "same-origin"
   Header always set Permissions-Policy "camera=(), geolocation=(), microphone=(), payment=(), usb=()"
@@ -40,5 +43,5 @@ ErrorDocument 404 /404.html
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "DENY"
   Header always unset X-Powered-By
-  Header always set X-Robots-Tag "noindex, nofollow, noarchive" env=AXYTHIC_NOINDEX
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive" env=REDIRECT_AXYTHIC_NOINDEX
 </IfModule>

@@ -9,7 +9,6 @@ import {
   Send,
   CheckCircle2,
   XCircle,
-  Sparkles,
 } from "lucide-react";
 
 const API_BASE_URL =
@@ -85,48 +84,14 @@ export default function ContactUs() {
   return (
     <section
       id="contact-us"
-      className="py-32 bg-theme-page transition-colors duration-300 relative overflow-hidden"
+      className="py-20 sm:py-24 bg-theme-page transition-colors duration-300 relative overflow-hidden"
     >
       {/* Background orbs */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <motion.div
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <Sparkles className="w-4 h-4 text-blue-400" />
-            <span className="text-sm font-medium text-blue-400 tracking-wide uppercase">
-              Get In Touch
-            </span>
-          </motion.div>
-          <motion.h2
-            className="text-4xl md:text-6xl font-extrabold text-theme-primary leading-[1.1] tracking-tight mb-4"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            Let's Build Something{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              Great
-            </span>
-          </motion.h2>
-          <motion.p
-            className="text-xl text-theme-muted max-w-2xl mx-auto font-light"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            Ready to accelerate your digital transformation? Reach out to us
-            today to discuss your project needs.
-          </motion.p>
-        </div>
+        <h2 className="sr-only">Contact details and project enquiry form</h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Info */}
@@ -178,7 +143,7 @@ export default function ContactUs() {
                   <a
                     href="https://wa.me/919488943920"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="inline-block text-theme-muted mt-1 hover:text-theme-primary transition-colors"
                   >
                     Chat with us
@@ -197,7 +162,7 @@ export default function ContactUs() {
                   <a
                     href="https://www.instagram.com/axythic_dev/"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="inline-block text-theme-muted mt-1 hover:text-theme-primary transition-colors"
                   >
                     @axythic_dev

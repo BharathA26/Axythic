@@ -14,21 +14,21 @@ export default function OurStory() {
   const features = [
     {
       icon: <Lightbulb className="w-6 h-6 text-blue-400" />,
-      title: "The Idea",
+      title: "Understand",
       description:
-        "Born from a passion to build software that truly solves complex business problems.",
+        "Clarify the people, tasks, constraints, and information the product needs to support.",
     },
     {
       icon: <Target className="w-6 h-6 text-indigo-400" />,
-      title: "The Mission",
+      title: "Shape",
       description:
-        "To bridge the gap between imagination and digital reality with high-quality engineering.",
+        "Turn the requirement into a reviewable scope, interface structure, and technical plan.",
     },
     {
       icon: <Rocket className="w-6 h-6 text-purple-400" />,
-      title: "The Evolution",
+      title: "Deliver",
       description:
-        "Grown into a full-scale agency delivering web, mobile, and custom tech solutions worldwide.",
+        "Build in testable increments and validate the agreed experience before release.",
     },
   ];
 
@@ -58,9 +58,9 @@ export default function OurStory() {
             </div>
 
             <h2 className="text-4xl md:text-6xl font-extrabold text-theme-primary mb-8 leading-[1.1] tracking-tight">
-              Crafting Digital{" "}
+              Clear thinking.{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-                Excellence.
+                Practical software.
               </span>
             </h2>
 
@@ -71,9 +71,10 @@ export default function OurStory() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              We don’t just build platforms; we engineer digital legacies. Our
-              journey is defined by a relentless pursuit of innovation, blending
-              cutting-edge aesthetics with seamless functionality.
+              Good software starts with a clear understanding of the problem.
+              Axythic focuses on the user journey, the operational workflow, and
+              the technical constraints before deciding how a product should be
+              built.
             </motion.p>
 
             <motion.p
@@ -83,8 +84,8 @@ export default function OurStory() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              From the first line of code to the final interaction, we transform
-              complex visions into intuitive digital realities.
+              The result is a practical path from requirements to a maintainable
+              web, mobile, or custom software experience.
             </motion.p>
           </motion.div>
 

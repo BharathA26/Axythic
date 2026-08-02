@@ -608,7 +608,7 @@ export default function FitnessApp() {
             <span className="font-black tracking-tight">FitPulse</span>
           </div>
           <p className="text-xs text-white/20">© 2025 Axythic Studio. All rights reserved.</p>
-          <a href="/" className="text-xs text-white/30 hover:text-white transition-colors">← Back to Portfolio</a>
+          <a href="/portfolio" className="text-xs text-white/30 hover:text-white transition-colors">← Back to Portfolio</a>
         </div>
       </footer>
 

@@ -6,27 +6,32 @@ const faqs = [
   {
     question: "Do you build both web and mobile applications?",
     answer:
-      "Yes, our team specializes in full-stack development. We build responsive web applications as well as native and cross-platform mobile apps for iOS and Android.",
+      "Axythic works on custom software, responsive web applications, and mobile-focused product experiences. The delivery approach is confirmed after the required users, platforms, and device capabilities are understood.",
   },
   {
-    question: "What is your typical project timeline?",
+    question: "How is a project timeline decided?",
     answer:
-      "Project timelines vary greatly depending on scope and complexity. A simple MVP might take 6-8 weeks, while a comprehensive enterprise platform could take several months. We provide detailed timelines during our initial discovery phase.",
+      "The timeline depends on scope, integrations, content readiness, review cycles, and release requirements. A specific schedule should be agreed only after those details have been reviewed.",
   },
   {
-    question: "Do you provide post-launch support and maintenance?",
+    question: "Can a project begin with a prototype?",
     answer:
-      "Absolutely. We offer various SLA and maintenance packages to ensure your application remains secure, up-to-date, and performs optimally long after the initial launch.",
+      "Yes. A focused prototype can help review navigation, workflow, or interface assumptions before a production implementation is defined. Prototype and production scope are kept clearly separate.",
   },
   {
-    question: "Who owns the code after the project is complete?",
+    question: "Can existing systems or services be integrated?",
     answer:
-      "Once the project is paid in full, you own 100% of the intellectual property and source code. We provide all repositories and necessary documentation during handover.",
+      "Integration needs can be assessed during scoping. Documentation, access methods, data ownership, security constraints, and service limits must be reviewed before a specific integration is confirmed.",
   },
   {
     question: "What is your technology stack?",
     answer:
-      "We are technology-agnostic but strongly prefer modern, scalable stacks. Our core expertise includes React, Next.js, Node.js, Python, Flutter, React Native, and cloud platforms like AWS and GCP.",
+      "The current Axythic website and portfolio use React, TypeScript, Vite, Tailwind CSS, React Router, and Express. A project stack should still be selected from its actual requirements and operating environment.",
+  },
+  {
+    question: "Is ongoing support included automatically?",
+    answer:
+      "Support, maintenance, monitoring, and response expectations should be defined in the project proposal or agreement. They are not assumed unless they are part of the agreed scope.",
   },
 ];
 

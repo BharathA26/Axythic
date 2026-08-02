@@ -1,24 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import PageCTA from "../components/PageCTA";
 import PrivacyPolicy from "../components/PrivacyPolicy";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import PublicPageLayout from "../components/PublicPageLayout";
 
 export default function PrivacyPolicyPage() {
-  const navigate = useNavigate();
-
   return (
-    <div
-      className="min-h-screen font-sans flex flex-col overflow-x-hidden transition-colors duration-300"
-      style={{ backgroundColor: "var(--bg-page)" }}
-    >
-      <Navbar />
-      <main className="flex-grow">
-        <PrivacyPolicy onBack={() => navigate("/")} />
-      </main>
-      <Footer
-        onShowPrivacyPolicy={() => {}}
-        onShowTerms={() => navigate("/terms")}
+    <PublicPageLayout>
+      <PrivacyPolicy />
+      <PageCTA
+        eyebrow="Privacy questions"
+        title="Need clarification about information submitted through this website?"
+        description="Use the contact page to send a privacy-related question or request using the published Axythic contact details."
+        primary={{ label: "Contact Axythic", to: "/contact" }}
+        secondary={{ label: "Return home", to: "/" }}
       />
-    </div>
+    </PublicPageLayout>
   );
 }
