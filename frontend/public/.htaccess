@@ -23,14 +23,21 @@ ErrorDocument 404 /404.html
 
   # Only declared SPA routes receive the application shell.
   RewriteRule ^$ index.html [L]
-  RewriteRule ^(?:services/(?:custom-software-development|web-development|mobile-app-development)|about|case-studies|portfolio|contact|privacy-policy|terms|axythicfin/dashboard|shopcart|demos/3d-landing-page|fitness-app|eduquest(?:/(?:student(?:/(?:courses|inbox|tasks|team|settings|plan|help))?|courses|admin))?|hrm/(?:dashboard|personnel|profile|applications|talent|events|settings))/?$ index.html [L]
+
+  # Indexable public pages. Nested service paths are matched explicitly.
+  RewriteRule ^(?:about|case-studies|portfolio|contact|privacy-policy|terms)/?$ index.html [L]
+  RewriteRule ^services/(?:custom-software-development|web-development|mobile-app-development)/?$ index.html [L]
+
+  # Approved portfolio demonstrations. Removed HRM and EduQuest routes are
+  # intentionally omitted so Apache returns a real HTTP 404 for them.
+  RewriteRule ^(?:axythicfin/dashboard|shopcart|demos/3d-landing-page|fitness-app)/?$ index.html [L]
 
   # Unknown paths must remain real HTTP 404 responses.
   RewriteRule ^ - [R=404,L]
 </IfModule>
 
 <IfModule mod_setenvif.c>
-  SetEnvIf Request_URI "^/(axythicfin|shopcart|demos|fitness-app|eduquest|hrm)(/|$)" AXYTHIC_NOINDEX
+  SetEnvIf Request_URI "^/(axythicfin|shopcart|demos|fitness-app)(/|$)" AXYTHIC_NOINDEX
 </IfModule>
 
 <IfModule mod_headers.c>
