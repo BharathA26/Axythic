@@ -14,6 +14,9 @@ const ThemeContext = createContext<ThemeContextValue>({
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined" || typeof localStorage === "undefined") {
+      return "light";
+    }
     const saved = localStorage.getItem("axythic-theme");
     return saved === "dark" ? "dark" : "light";
   });

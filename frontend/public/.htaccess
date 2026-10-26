@@ -16,6 +16,10 @@ ErrorDocument 404 /404.html
   # Public page canonicals use no trailing slash except the site root.
   RewriteRule ^(services/(?:custom-software-development|web-development|mobile-app-development)|about|case-studies|portfolio|contact|privacy-policy|terms)/$ /$1 [R=301,L,NE]
 
+  # Serve prerendered HTML if matching file exists (e.g. /about -> about.html)
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+
   # Serve real assets directly.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
@@ -28,8 +32,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^(?:about|case-studies|portfolio|contact|privacy-policy|terms)/?$ index.html [L]
   RewriteRule ^services/(?:custom-software-development|web-development|mobile-app-development)/?$ index.html [L]
 
-  # Approved portfolio demonstrations. Removed HRM and EduQuest routes are
-  # intentionally omitted so Apache returns a real HTTP 404 for them.
+  # Approved portfolio demonstrations.
   RewriteRule ^(?:axythicfin/dashboard|shopcart|demos/3d-landing-page|fitness-app)/?$ index.html [L]
 
   # Unknown paths must remain real HTTP 404 responses.
@@ -37,7 +40,7 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 <IfModule mod_setenvif.c>
-  SetEnvIf Request_URI "^/(axythicfin|shopcart|demos|fitness-app)(/|$)" AXYTHIC_NOINDEX
+  SetEnvIf Request_URI "^/(axythicfin|shopcart|demos|fitness-app|hrm|eduquest)(/|$)" AXYTHIC_NOINDEX
 </IfModule>
 
 <IfModule mod_headers.c>

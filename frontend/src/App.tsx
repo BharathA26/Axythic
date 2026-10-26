@@ -8,9 +8,8 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import DemoNotice from "./components/DemoNotice";
-import RouteMetadata, {
-  isDemoRoute,
-} from "./components/RouteMetadata";
+import RouteMetadata from "./components/RouteMetadata";
+import { isDemoRoute } from "./seo/routes";
 import { ReactLenis, useLenis } from "lenis/react";
 
 // Lazy-load all demo/sub-application pages to keep the initial bundle small

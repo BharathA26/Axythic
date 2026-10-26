@@ -59,7 +59,7 @@ export default function Footer() {
           >
             <img
               src="/axythic-logo.svg"
-              alt=""
+              alt="Axythic logo"
               width={28}
               height={32}
               draggable={false}
@@ -207,6 +207,14 @@ export default function Footer() {
                 >
                   Portfolio
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="https://axythic.com/blog/"
+                  className={`hover:text-blue-400 transition-colors rounded-sm ${focusStyles}`}
+                >
+                  Blog
+                </a>
               </li>
             </ul>
           </div>

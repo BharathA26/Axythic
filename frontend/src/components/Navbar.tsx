@@ -23,6 +23,7 @@ const mainLinks = [
   { label: "About", to: "/about" },
   { label: "Case Studies", to: "/case-studies" },
   { label: "Portfolio", to: "/portfolio" },
+  { label: "Blog", href: "https://axythic.com/blog/" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -64,7 +65,7 @@ export default function Navbar() {
             >
               <img
                 src="/axythic-logo.svg"
-                alt=""
+                alt="Axythic logo"
                 width={34}
                 height={38}
                 className="drop-shadow-sm"
@@ -101,16 +102,26 @@ export default function Navbar() {
               </div>
             </details>
 
-            {mainLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                aria-current={pathname === link.to ? "page" : undefined}
-                className={`text-sm font-semibold hover:text-blue-500 transition-colors rounded-sm ${pathname === link.to ? "text-blue-500" : "text-theme-muted"} ${focusStyles}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {mainLinks.map((link) =>
+              link.href ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={`text-sm font-semibold hover:text-blue-500 transition-colors rounded-sm text-theme-muted ${focusStyles}`}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.to}
+                  to={link.to!}
+                  aria-current={pathname === link.to ? "page" : undefined}
+                  className={`text-sm font-semibold hover:text-blue-500 transition-colors rounded-sm ${pathname === link.to ? "text-blue-500" : "text-theme-muted"} ${focusStyles}`}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
 
           <motion.div
@@ -243,17 +254,28 @@ export default function Navbar() {
 
               <div className="my-4 border-t border-theme" />
               <div className="space-y-1">
-                {mainLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setMobileOpen(false)}
-                    aria-current={pathname === link.to ? "page" : undefined}
-                    className={`block px-2 py-2.5 rounded-lg text-sm font-semibold hover:text-blue-500 hover:bg-theme-card transition-colors ${pathname === link.to ? "text-blue-500 bg-theme-card" : "text-theme-muted"} ${focusStyles}`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {mainLinks.map((link) =>
+                  link.href ? (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block px-2 py-2.5 rounded-lg text-sm font-semibold text-theme-muted hover:text-blue-500 hover:bg-theme-card transition-colors ${focusStyles}`}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.to}
+                      to={link.to!}
+                      onClick={() => setMobileOpen(false)}
+                      aria-current={pathname === link.to ? "page" : undefined}
+                      className={`block px-2 py-2.5 rounded-lg text-sm font-semibold hover:text-blue-500 hover:bg-theme-card transition-colors ${pathname === link.to ? "text-blue-500 bg-theme-card" : "text-theme-muted"} ${focusStyles}`}
+                    >
+                      {link.label}
+                    </Link>
+                  ),
+                )}
               </div>
 
               <p className="mt-5 px-2 text-xs font-semibold uppercase tracking-widest text-blue-500">

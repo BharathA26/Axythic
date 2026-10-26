@@ -5,145 +5,818 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Page Not Found | Axythic</title>
+    <!-- Apply saved theme before paint to avoid flash -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem("axythic-theme");
+        var theme = saved === "dark" ? "dark" : "light";
+        document.documentElement.classList.add(theme);
+      })();
+    </script>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+      /* ── CSS Variables ── */
       :root {
-        color-scheme: dark;
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        background: #030303;
-        color: #fff;
+        --bg-page: #ffffff;
+        --bg-card: rgba(0, 0, 0, 0.04);
+        --border-color: rgba(0, 0, 0, 0.08);
+        --text-primary: #09090b;
+        --text-muted: #6b7280;
+        --text-faint: #9ca3af;
+        --dot-color: rgba(0, 0, 0, 0.05);
+        --navbar-bg: rgba(255, 255, 255, 0.95);
+        --navbar-border: rgba(0, 0, 0, 0.08);
+        --orb1: rgba(79, 70, 229, 0.12);
+        --orb2: rgba(37, 99, 235, 0.09);
+        --toggle-bg: rgba(0, 0, 0, 0.08);
+        --toggle-border: rgba(0, 0, 0, 0.12);
+        --thumb-bg: #f59e0b;
+        --thumb-shadow: rgba(245, 158, 11, 0.6);
+        --thumb-x: 29px;
       }
-      * {
-        box-sizing: border-box;
+
+      :root.dark {
+        --bg-page: #030303;
+        --bg-card: rgba(255, 255, 255, 0.05);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-muted: #9ca3af;
+        --text-faint: #6b7280;
+        --dot-color: rgba(255, 255, 255, 0.12);
+        --navbar-bg: rgba(3, 3, 3, 0.95);
+        --navbar-border: rgba(255, 255, 255, 0.08);
+        --orb1: rgba(79, 70, 229, 0.2);
+        --orb2: rgba(37, 99, 235, 0.15);
+        --toggle-bg: rgba(59, 130, 246, 0.15);
+        --toggle-border: rgba(59, 130, 246, 0.3);
+        --thumb-bg: #1d4ed8;
+        --thumb-shadow: rgba(59, 130, 246, 0.6);
+        --thumb-x: 1px;
       }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html {
+        scroll-behavior: smooth;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
       body {
         min-height: 100vh;
-        margin: 0;
-        background:
-          radial-gradient(circle at 85% 15%, rgba(79, 70, 229, 0.2), transparent 34rem),
-          radial-gradient(circle at 10% 90%, rgba(37, 99, 235, 0.14), transparent 32rem),
-          #030303;
+        background-color: var(--bg-page);
+        color: var(--text-primary);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        overflow-x: hidden;
       }
-      header,
-      footer {
-        width: min(72rem, calc(100% - 3rem));
-        margin: 0 auto;
+
+      /* ── Ambient orbs ── */
+      .orb-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
       }
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 5rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      .orb-1 {
+        top: -8rem; right: -8rem;
+        width: 500px; height: 500px;
+        background: radial-gradient(circle, var(--orb1) 0%, transparent 70%);
       }
+      .orb-2 {
+        bottom: -10rem; left: -5rem;
+        width: 420px; height: 420px;
+        background: radial-gradient(circle, var(--orb2) 0%, transparent 70%);
+      }
+
+      /* ── Dot grid ── */
+      .dot-grid {
+        position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.3;
+        background-image: radial-gradient(circle, var(--dot-color) 1.5px, transparent 1.5px);
+        background-size: 36px 36px;
+      }
+
+      /* ═══════════════════════════════
+         NAVBAR
+      ═══════════════════════════════ */
+      .navbar {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        background-color: var(--navbar-bg);
+        border-bottom: 1px solid var(--navbar-border);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+
+      .navbar-inner {
+        max-width: 80rem; margin: 0 auto;
+        padding: 0 1rem;
+        display: flex; align-items: center; justify-content: space-between;
+        height: 5rem;
+      }
+
+      @media (min-width: 640px) { .navbar-inner { padding: 0 1.5rem; } }
+      @media (min-width: 1024px) { .navbar-inner { padding: 0 2rem; } }
+
+      /* Brand */
       .brand {
+        display: flex; align-items: center; gap: 0.6rem;
+        text-decoration: none;
+      }
+      .brand-logo { width: 34px; height: 38px; display: block; }
+      .brand-text {
+        font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em;
+        background: linear-gradient(90deg, #22d3ee, #60a5fa, #818cf8);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Desktop nav links */
+      .nav-links {
+        display: none; align-items: center; gap: 1.75rem;
+      }
+      @media (min-width: 1024px) { .nav-links { display: flex; } }
+
+      .nav-link {
+        font-size: 0.875rem; font-weight: 600;
+        color: var(--text-muted);
+        text-decoration: none;
+        border-radius: 4px;
+        transition: color 0.2s ease;
+      }
+      .nav-link:hover { color: #3b82f6; }
+      .nav-link:focus-visible { outline: 2px solid #3b82f6; outline-offset: 4px; }
+
+      /* Services dropdown */
+      .nav-dropdown { position: relative; }
+      .nav-dropdown summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex; align-items: center; gap: 0.25rem;
+        font-size: 0.875rem; font-weight: 600;
+        color: var(--text-muted);
+        transition: color 0.2s;
+        border-radius: 4px;
+      }
+      .nav-dropdown summary:hover { color: #3b82f6; }
+      .nav-dropdown summary:focus-visible { outline: 2px solid #3b82f6; outline-offset: 4px; }
+      .nav-dropdown summary .chevron {
+        width: 16px; height: 16px;
+        transition: transform 0.2s;
+      }
+      .nav-dropdown[open] summary .chevron { transform: rotate(180deg); }
+      .dropdown-menu {
+        position: absolute; top: calc(100% + 1rem); left: 50%; transform: translateX(-50%);
+        width: 16rem;
+        border-radius: 1rem; padding: 0.5rem;
+        background-color: var(--bg-page);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+      .dropdown-item {
+        display: block; padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+        font-size: 0.875rem; font-weight: 600;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s, background-color 0.2s;
+      }
+      .dropdown-item:hover { color: #3b82f6; background-color: var(--bg-card); }
+
+      /* Right side: toggle + CTA */
+      .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+
+      /* Theme toggle */
+      .theme-toggle {
+        position: relative;
+        display: flex; align-items: center;
+        width: 3.5rem; height: 1.75rem;
+        border-radius: 9999px; padding: 0.125rem;
+        cursor: pointer;
+        background-color: var(--toggle-bg);
+        border: 1px solid var(--toggle-border);
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+      .theme-toggle:focus-visible { outline: 2px solid #3b82f6; outline-offset: 4px; }
+      .toggle-thumb {
+        position: absolute;
+        width: 1.25rem; height: 1.25rem;
+        border-radius: 9999px;
+        display: flex; align-items: center; justify-content: center;
+        background-color: var(--thumb-bg);
+        box-shadow: 0 0 8px var(--thumb-shadow);
+        left: var(--thumb-x);
+        transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, box-shadow 0.3s;
+      }
+      .toggle-thumb svg { width: 10px; height: 10px; color: #fff; }
+
+      /* Get Started CTA */
+      .nav-cta {
+        display: none;
+        padding: 0.625rem 1.25rem;
+        border-radius: 9999px;
+        font-size: 0.875rem; font-weight: 600;
+        background: linear-gradient(90deg, #2563eb, #4f46e5);
         color: #fff;
-        font-size: 1.2rem;
-        font-weight: 800;
-        letter-spacing: -0.03em;
         text-decoration: none;
+        box-shadow: 0 4px 14px rgba(79,70,229,0.3);
+        transition: filter 0.2s, transform 0.2s;
       }
-      .contact {
-        color: #a5b4fc;
-        font-size: 0.9rem;
-        font-weight: 600;
+      .nav-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
+      .nav-cta:focus-visible { outline: 2px solid #60a5fa; outline-offset: 4px; }
+      @media (min-width: 640px) { .nav-cta { display: inline-flex; align-items: center; } }
+
+      /* Mobile hamburger */
+      .hamburger {
+        display: flex;
+        padding: 0.5rem; border-radius: 0.5rem;
+        background: none; border: none; cursor: pointer;
+        color: var(--text-muted);
+        transition: color 0.2s;
+      }
+      .hamburger:hover { color: #3b82f6; }
+      .hamburger:focus-visible { outline: 2px solid #3b82f6; outline-offset: 4px; }
+      .hamburger svg { width: 20px; height: 20px; }
+      @media (min-width: 1024px) { .hamburger { display: none; } }
+
+      /* Mobile nav drawer */
+      .mobile-nav {
+        display: none;
+        border-top: 1px solid var(--navbar-border);
+        background-color: var(--navbar-bg);
+        padding: 1.25rem 1rem 1.5rem;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+      .mobile-nav.open { display: block; }
+      .mobile-section-label {
+        font-size: 0.7rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.15em;
+        color: #60a5fa; padding: 0 0.5rem; margin-bottom: 0.5rem;
+      }
+      .mobile-link {
+        display: block; padding: 0.625rem 0.5rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem; font-weight: 600;
+        color: var(--text-muted);
         text-decoration: none;
+        transition: color 0.2s, background-color 0.2s;
       }
+      .mobile-link:hover { color: #3b82f6; background-color: var(--bg-card); }
+      .mobile-divider { margin: 1rem 0; border: none; border-top: 1px solid var(--border-color); }
+      .mobile-cta {
+        display: block; width: 100%; margin-top: 1.25rem;
+        padding: 0.7rem; border-radius: 9999px;
+        text-align: center; font-size: 0.875rem; font-weight: 600;
+        background: linear-gradient(90deg, #2563eb, #4f46e5);
+        color: #fff; text-decoration: none;
+      }
+
+      /* ═══════════════════════════════
+         PAGE CONTENT
+      ═══════════════════════════════ */
+      .page-wrap {
+        position: relative; z-index: 1;
+        min-height: 100vh;
+        display: flex; flex-direction: column;
+      }
+
       main {
-        min-height: calc(100vh - 10rem);
-        display: grid;
-        place-items: center;
-        width: min(46rem, calc(100% - 3rem));
-        margin: 0 auto;
-        padding: 5rem 0;
+        flex: 1;
+        display: grid; place-items: center;
+        padding: 8rem 1rem 5rem;
         text-align: center;
       }
+
+      .content { display: flex; flex-direction: column; align-items: center; animation: fadeUp 0.65s ease both; }
+
+      .icon-card {
+        width: 5.5rem; height: 5.5rem;
+        border-radius: 1.25rem;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0 40px rgba(79,70,229,0.15);
+        margin-bottom: 2rem;
+        animation: glowPulse 2.5s ease-in-out 1s infinite;
+        transition: background 0.3s, border-color 0.3s;
+      }
+      .icon-card svg {
+        width: 2.5rem; height: 2.5rem;
+        color: #6366f1;
+        animation: compassWobble 2.4s ease-in-out 1.5s infinite;
+      }
+
       .eyebrow {
-        margin: 0;
         color: #60a5fa;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
+        font-size: 0.75rem; font-weight: 700;
+        letter-spacing: 0.3em; text-transform: uppercase;
+        margin-bottom: 1rem; animation: fadeUp 0.5s ease 0.1s both;
       }
+
       h1 {
-        margin: 1.25rem 0 0;
-        font-size: clamp(2.8rem, 9vw, 5rem);
-        line-height: 1.02;
-        letter-spacing: -0.055em;
+        font-size: clamp(2.4rem, 8vw, 4.2rem);
+        line-height: 1.05; letter-spacing: -0.04em; font-weight: 800;
+        color: var(--text-primary);
+        transition: color 0.3s;
+        animation: fadeUp 0.55s ease 0.18s both;
       }
+
+      .divider {
+        width: 4rem; height: 1px;
+        margin: 1.5rem auto;
+        background: linear-gradient(to right, transparent, rgba(99,102,241,0.5), transparent);
+        animation: scaleIn 0.5s ease 0.28s both;
+      }
+
       .message {
-        max-width: 36rem;
-        margin: 1.5rem auto 0;
-        color: #a1a1aa;
-        font-size: 1.1rem;
-        line-height: 1.75;
+        max-width: 32rem;
+        color: var(--text-muted);
+        font-size: 1rem; line-height: 1.75;
+        transition: color 0.3s;
+        animation: fadeUp 0.5s ease 0.3s both;
       }
+
       .actions {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.9rem;
-        margin-top: 2rem;
+        display: flex; flex-wrap: wrap;
+        justify-content: center; gap: 0.9rem;
+        margin-top: 2.25rem;
+        animation: fadeUp 0.5s ease 0.4s both;
       }
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 3rem;
-        padding: 0.75rem 1.35rem;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 999px;
-        color: #fff;
-        font-weight: 700;
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+        min-height: 2.8rem; padding: 0.7rem 1.6rem;
+        border-radius: 9999px;
+        font-size: 0.875rem; font-weight: 600;
         text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
       }
-      .button-primary {
-        border-color: transparent;
+      .btn:hover { transform: translateY(-2px); }
+      .btn-primary {
         background: linear-gradient(90deg, #2563eb, #4f46e5);
+        color: #fff; border: none;
+        box-shadow: 0 8px 32px rgba(79,70,229,0.3);
       }
+      .btn-primary:hover { box-shadow: 0 12px 40px rgba(79,70,229,0.45); }
+      .btn-secondary {
+        background: var(--bg-card); color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        transition: transform 0.2s, border-color 0.2s, background 0.3s, color 0.3s;
+      }
+      .btn-secondary:hover { border-color: rgba(99,102,241,0.5); }
+
+      @media (max-width: 480px) {
+        .actions { flex-direction: column; align-items: center; }
+        .btn { width: 100%; max-width: 16rem; }
+      }
+
+      a:focus-visible { outline: 2px solid #60a5fa; outline-offset: 4px; border-radius: 4px; }
+
+      /* ═══════════════════════════════
+         FOOTER
+      ═══════════════════════════════ */
       footer {
-        min-height: 5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1.25rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.09);
+        background: #09090b;
+        border-top: 1px solid #111113;
+        color: #9ca3af;
+        padding: 5rem 1rem 3rem;
+        position: relative; z-index: 1;
       }
-      footer a {
-        color: #a1a1aa;
-        font-size: 0.85rem;
+
+      .footer-inner {
+        max-width: 80rem; margin: 0 auto;
+        display: grid; gap: 3rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 1024px) {
+        .footer-inner { grid-template-columns: 1fr 1.6fr; }
+      }
+
+      .footer-brand { display: flex; flex-direction: column; gap: 1.5rem; max-width: 22rem; }
+      .footer-logo-link {
+        display: flex; align-items: center; gap: 0.6rem;
+        text-decoration: none; width: fit-content;
+      }
+      .footer-logo { width: 28px; height: 32px; }
+      .footer-brand-text {
+        font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em;
+        background: linear-gradient(90deg, #22d3ee, #60a5fa, #818cf8);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .footer-desc { font-size: 0.875rem; line-height: 1.7; }
+
+      .footer-connect-label {
+        font-size: 0.7rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.18em;
+        color: #6b7280; margin-bottom: 0.75rem;
+      }
+
+      .social-list { display: flex; flex-wrap: wrap; gap: 0.625rem; list-style: none; }
+      .social-link {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        padding: 0.5rem 0.875rem; border-radius: 9999px;
+        border: 1px solid #1f1f23;
+        background: rgba(255,255,255,0.03);
+        font-size: 0.875rem; font-weight: 500;
+        color: #9ca3af; text-decoration: none;
+        transition: border-color 0.2s, background 0.2s, color 0.2s;
+      }
+      .social-link svg { width: 16px; height: 16px; }
+      .social-link.instagram:hover { border-color: rgba(236,72,153,0.4); background: rgba(236,72,153,0.1); color: #f472b6; }
+      .social-link.whatsapp:hover  { border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.1); color: #34d399; }
+
+      .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; margin-top: 1.25rem; }
+      .contact-item {
+        display: inline-flex; align-items: center; gap: 0.625rem;
+        font-size: 0.875rem; color: #9ca3af; text-decoration: none;
+        transition: color 0.2s;
+      }
+      .contact-item:hover { color: #fff; }
+      .contact-item:hover .contact-icon { border-color: rgba(59,130,246,0.3); color: #60a5fa; }
+      .contact-icon {
+        width: 2rem; height: 2rem;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 0.5rem;
+        border: 1px solid #1f1f23;
+        background: rgba(255,255,255,0.03);
+        color: #6b7280;
+        flex-shrink: 0;
+        transition: border-color 0.2s, color 0.2s;
+      }
+      .contact-icon svg { width: 16px; height: 16px; }
+
+      /* Footer columns */
+      .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+      @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+
+      .footer-col h2 { color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+      .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+      .footer-col a {
+        font-size: 0.875rem; color: #9ca3af;
         text-decoration: none;
+        transition: color 0.2s;
       }
-      a:focus-visible {
-        outline: 2px solid #60a5fa;
-        outline-offset: 4px;
+      .footer-col a:hover { color: #60a5fa; }
+
+      /* Footer bottom bar */
+      .footer-bottom {
+        max-width: 80rem; margin: 2rem auto 0;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(31,31,35,0.8);
+        display: flex; flex-direction: column; align-items: center;
+        gap: 1rem; font-size: 0.8rem; color: #6b7280;
+      }
+      @media (min-width: 768px) {
+        .footer-bottom { flex-direction: row; justify-content: space-between; }
+      }
+      .footer-bottom-links { display: flex; gap: 1.5rem; }
+      .footer-bottom-links a {
+        color: #6b7280; text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-bottom-links a:hover { color: #d1d5db; text-decoration: underline; }
+
+      /* ── Animations ── */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes scaleIn {
+        from { transform: scaleX(0); opacity: 0; }
+        to   { transform: scaleX(1); opacity: 1; }
+      }
+      @keyframes glowPulse {
+        0%, 100% { box-shadow: 0 0 28px rgba(99,102,241,0.15); }
+        50%       { box-shadow: 0 0 44px rgba(99,102,241,0.35); }
+      }
+      @keyframes compassWobble {
+        0%, 70%, 100% { transform: rotate(0deg); }
+        75%  { transform: rotate(-15deg); }
+        80%  { transform: rotate(15deg); }
+        85%  { transform: rotate(-10deg); }
+        90%  { transform: rotate(10deg); }
+        95%  { transform: rotate(0deg); }
       }
     </style>
   </head>
   <body>
-    <header>
-      <a class="brand" href="/">Axythic</a>
-      <a class="contact" href="/contact">Contact</a>
-    </header>
-    <main>
-      <div>
-        <p class="eyebrow">Error 404</p>
-        <h1>This page could not be found.</h1>
-        <p class="message">
-          The address may be incorrect, or the page may have moved. Return to
-          the homepage or contact Axythic if you need help finding something.
-        </p>
-        <div class="actions">
-          <a class="button button-primary" href="/">Return home</a>
-          <a class="button" href="/contact">Contact Axythic</a>
+    <!-- Ambient orbs -->
+    <div class="orb-wrap" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="dot-grid" aria-hidden="true"></div>
+
+    <div class="page-wrap">
+
+      <!-- ══ NAVBAR ══ -->
+      <nav class="navbar" aria-label="Primary navigation">
+        <div class="navbar-inner">
+          <!-- Brand -->
+          <a class="brand" href="/" aria-label="Axythic home">
+            <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 88" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="aBlue" x1="39" y1="4" x2="3" y2="84" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#42B4F5"/><stop offset="45%" stop-color="#1976D2"/><stop offset="100%" stop-color="#0D3A8A"/></linearGradient>
+                <linearGradient id="aRainbow" x1="39" y1="4" x2="73" y2="84" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00D4E8"/><stop offset="28%" stop-color="#8B3FD9"/><stop offset="62%" stop-color="#E82070"/><stop offset="100%" stop-color="#FF6010"/></linearGradient>
+                <linearGradient id="aSilver" x1="52" y1="4" x2="75" y2="84" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#A8D4F0"/><stop offset="60%" stop-color="#7FA8C8"/><stop offset="100%" stop-color="#4D7490"/></linearGradient>
+                <radialGradient id="aApex" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+                <linearGradient id="aReflect" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="white" stop-opacity="0.22"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient>
+                <mask id="reflectMask"><rect x="0" y="0" width="78" height="18" fill="url(#aReflect)"/></mask>
+              </defs>
+              <g transform="translate(0, 172) scale(1, -1)" mask="url(#reflectMask)"><polygon fill="url(#aBlue)" points="39,4 3,84 21,84 39,57"/><polygon fill="url(#aRainbow)" points="39,4 52,4 73,84 57,84 39,57"/><polygon fill="url(#aSilver)" points="52,4 55,4 75,84 73,84"/></g>
+              <polygon fill="url(#aBlue)" points="39,4 3,84 21,84 39,57"/>
+              <polygon fill="url(#aRainbow)" points="39,4 52,4 73,84 57,84 39,57"/>
+              <polygon fill="url(#aSilver)" points="52,4 55,4 75,84 73,84"/>
+              <ellipse cx="44" cy="11" rx="9" ry="6" fill="url(#aApex)" transform="rotate(-18, 44, 11)"/>
+            </svg>
+            <span class="brand-text">Axythic</span>
+          </a>
+
+          <!-- Desktop links -->
+          <div class="nav-links">
+            <details class="nav-dropdown">
+              <summary>
+                Services
+                <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </summary>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/services/custom-software-development">Custom Software</a>
+                <a class="dropdown-item" href="/services/web-development">Web Development</a>
+                <a class="dropdown-item" href="/services/mobile-app-development">Mobile App Development</a>
+              </div>
+            </details>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/case-studies">Case Studies</a>
+            <a class="nav-link" href="/portfolio">Portfolio</a>
+            <a class="nav-link" href="/contact">Contact</a>
+          </div>
+
+          <!-- Right: toggle + CTA + hamburger -->
+          <div class="nav-right">
+            <!-- Theme toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+              <div class="toggle-thumb" id="toggleThumb">
+                <!-- Moon icon (shown in dark) -->
+                <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                </svg>
+                <!-- Sun icon (shown in light) -->
+                <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                  <circle cx="12" cy="12" r="4"/>
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                </svg>
+              </div>
+            </button>
+
+            <a class="nav-cta" href="/contact">Get Started</a>
+
+            <!-- Hamburger -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu"
+              aria-expanded="false" aria-controls="mobileNav" type="button">
+              <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+              <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </main>
-    <footer>
-      <a href="/privacy-policy">Privacy Policy</a>
-      <a href="/terms">Terms &amp; Conditions</a>
-    </footer>
+
+        <!-- Mobile drawer -->
+        <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+          <p class="mobile-section-label">Services</p>
+          <a class="mobile-link" href="/services/custom-software-development">Custom Software</a>
+          <a class="mobile-link" href="/services/web-development">Web Development</a>
+          <a class="mobile-link" href="/services/mobile-app-development">Mobile App Development</a>
+          <hr class="mobile-divider" />
+          <a class="mobile-link" href="/about">About</a>
+          <a class="mobile-link" href="/case-studies">Case Studies</a>
+          <a class="mobile-link" href="/portfolio">Portfolio</a>
+          <a class="mobile-link" href="/contact">Contact</a>
+          <a class="mobile-cta" href="/contact">Get Started</a>
+        </div>
+      </nav>
+
+      <!-- ══ MAIN CONTENT ══ -->
+      <main>
+        <div class="content">
+          <!-- Compass icon -->
+          <div class="icon-card" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+          </div>
+
+          <p class="eyebrow">Error 404</p>
+          <h1>Page not found.</h1>
+          <div class="divider"></div>
+          <p class="message">
+            The address may be incorrect, or the page may have moved. Return to
+            the homepage or contact Axythic if you need help finding something.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              Return home
+            </a>
+            <a class="btn btn-secondary" href="/contact">
+              Contact Axythic
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </main>
+
+      <!-- ══ FOOTER ══ -->
+      <footer>
+        <div class="footer-inner">
+          <!-- Left: brand + social + contact -->
+          <div class="footer-brand">
+            <a class="footer-logo-link" href="/" aria-label="Axythic home">
+              <svg class="footer-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 88" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="fBlue" x1="39" y1="4" x2="3" y2="84" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#42B4F5"/><stop offset="45%" stop-color="#1976D2"/><stop offset="100%" stop-color="#0D3A8A"/></linearGradient>
+                  <linearGradient id="fRainbow" x1="39" y1="4" x2="73" y2="84" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00D4E8"/><stop offset="28%" stop-color="#8B3FD9"/><stop offset="62%" stop-color="#E82070"/><stop offset="100%" stop-color="#FF6010"/></linearGradient>
+                  <linearGradient id="fSilver" x1="52" y1="4" x2="75" y2="84" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#A8D4F0"/><stop offset="60%" stop-color="#7FA8C8"/><stop offset="100%" stop-color="#4D7490"/></linearGradient>
+                  <radialGradient id="fApex" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+                  <linearGradient id="fReflect" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="white" stop-opacity="0.22"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient>
+                  <mask id="fReflectMask"><rect x="0" y="0" width="78" height="18" fill="url(#fReflect)"/></mask>
+                </defs>
+                <g transform="translate(0, 172) scale(1, -1)" mask="url(#fReflectMask)"><polygon fill="url(#fBlue)" points="39,4 3,84 21,84 39,57"/><polygon fill="url(#fRainbow)" points="39,4 52,4 73,84 57,84 39,57"/><polygon fill="url(#fSilver)" points="52,4 55,4 75,84 73,84"/></g>
+                <polygon fill="url(#fBlue)" points="39,4 3,84 21,84 39,57"/>
+                <polygon fill="url(#fRainbow)" points="39,4 52,4 73,84 57,84 39,57"/>
+                <polygon fill="url(#fSilver)" points="52,4 55,4 75,84 73,84"/>
+                <ellipse cx="44" cy="11" rx="9" ry="6" fill="url(#fApex)" transform="rotate(-18, 44, 11)"/>
+              </svg>
+              <span class="footer-brand-text">Axythic</span>
+            </a>
+            <p class="footer-desc">
+              Custom software, web applications, and mobile-focused digital
+              experiences built around defined users and requirements.
+            </p>
+            <div>
+              <p class="footer-connect-label">Connect with us</p>
+              <ul class="social-list" aria-label="Social media">
+                <li>
+                  <a class="social-link instagram" href="https://www.instagram.com/axythic_dev/"
+                    target="_blank" rel="noopener noreferrer" aria-label="Instagram — opens in a new tab">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a class="social-link whatsapp" href="https://wa.me/919488943920"
+                    target="_blank" rel="noopener noreferrer" aria-label="WhatsApp — opens in a new tab">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.895 6.994c-.003 5.45-4.437 9.884-9.892 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                    </svg>
+                    WhatsApp
+                  </a>
+                </li>
+              </ul>
+              <ul class="contact-list" aria-label="Contact details">
+                <li>
+                  <a class="contact-item" href="mailto:info@axythic.com">
+                    <span class="contact-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                      </svg>
+                    </span>
+                    info@axythic.com
+                  </a>
+                </li>
+                <li>
+                  <a class="contact-item" href="tel:+919488943920">
+                    <span class="contact-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16z"/>
+                      </svg>
+                    </span>
+                    +91 94889 43920
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right: link columns -->
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h2>Services</h2>
+              <ul>
+                <li><a href="/services/custom-software-development">Custom Software</a></li>
+                <li><a href="/services/web-development">Web Development</a></li>
+                <li><a href="/services/mobile-app-development">Mobile App Development</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h2>Company</h2>
+              <ul>
+                <li><a href="/about">About</a></li>
+                <li><a href="/case-studies">Case Studies</a></li>
+                <li><a href="/contact">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h2>Explore</h2>
+              <ul>
+                <li><a href="/#our-story">Our Story</a></li>
+                <li><a href="/#vision-mission">Vision &amp; Mission</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="https://axythic.com/blog/">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer-bottom">
+          <p>© <span id="year"></span> Axythic. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+          </div>
+        </div>
+      </footer>
+    </div><!-- /.page-wrap -->
+
+    <script>
+      // ── Year ──
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ── Theme toggle ──
+      var html = document.documentElement;
+      var btn = document.getElementById("themeToggle");
+      var moonIcon = document.getElementById("moonIcon");
+      var sunIcon  = document.getElementById("sunIcon");
+
+      function applyTheme(isDark) {
+        if (isDark) {
+          html.classList.add("dark");
+          html.classList.remove("light");
+          moonIcon.style.display = "block";
+          sunIcon.style.display  = "none";
+        } else {
+          html.classList.add("light");
+          html.classList.remove("dark");
+          moonIcon.style.display = "none";
+          sunIcon.style.display  = "block";
+        }
+        localStorage.setItem("axythic-theme", isDark ? "dark" : "light");
+      }
+
+      // Initial icon state
+      applyTheme(html.classList.contains("dark"));
+
+      btn.addEventListener("click", function () {
+        applyTheme(!html.classList.contains("dark"));
+      });
+
+      // ── Mobile hamburger ──
+      var hamburgerBtn = document.getElementById("hamburgerBtn");
+      var mobileNav    = document.getElementById("mobileNav");
+      var menuIcon     = document.getElementById("menuIcon");
+      var closeIcon    = document.getElementById("closeIcon");
+      var isOpen = false;
+
+      hamburgerBtn.addEventListener("click", function () {
+        isOpen = !isOpen;
+        mobileNav.classList.toggle("open", isOpen);
+        mobileNav.setAttribute("aria-hidden", String(!isOpen));
+        hamburgerBtn.setAttribute("aria-expanded", String(isOpen));
+        menuIcon.style.display  = isOpen ? "none"  : "block";
+        closeIcon.style.display = isOpen ? "block" : "none";
+        hamburgerBtn.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      });
+    </script>
   </body>
 </html>

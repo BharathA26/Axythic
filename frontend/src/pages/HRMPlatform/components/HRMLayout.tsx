@@ -17,21 +17,19 @@ interface HRMLayoutProps {
 }
 
 export const HRMLayout: React.FC<HRMLayoutProps> = ({ children, title }) => {
-  const [activeTab, setActiveTab] = useState("Overview");
+  const defaultTab =
+    title === "Platform Settings"
+      ? "Settings"
+      : title === "Reports"
+        ? "Reports"
+        : "Overview";
+  const [userSelectedTab, setUserSelectedTab] = useState<string | null>(null);
+  const activeTab = userSelectedTab ?? defaultTab;
+  const setActiveTab = setUserSelectedTab;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const tabs = ["Overview", "Reports", "Settings"];
-
-  React.useEffect(() => {
-    if (title === "Platform Settings") {
-      setActiveTab("Settings");
-    } else if (title === "Reports") {
-      setActiveTab("Reports");
-    } else {
-      setActiveTab("Overview");
-    }
-  }, [title]);
 
   const toggleDropdown = (name: string) => {
     setActiveDropdown(activeDropdown === name ? null : name);
